@@ -6,6 +6,8 @@ class Game:
     secret_num = ''
     attempts = 0
     MAX_ATTEMPTS = 8
+    correct_num = 0
+    correct_pos = 0
 
     def gen_secret_num(self):
         while len(self.secret_num) != 4:
@@ -39,3 +41,6 @@ class Game:
             print("Attempts left: " + str(remaining_attempts))
             if self.attempts >= self.MAX_ATTEMPTS:
                 print("You have reached the maximum attempt! You lost")
+
+            self.correct_num = correct_num
+            self.correct_pos = correct_pos

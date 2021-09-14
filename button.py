@@ -20,6 +20,8 @@ PURPLE = (255, 0, 255)
 # User Input
 user_input = ''
 attempts = 0
+correct_num = 0
+correct_pos = 0
 
 
 class Button:
@@ -92,8 +94,13 @@ class Button:
 
     def button_action(self):
         global user_input
-        if len(user_input) < 4:
-            user_input += self.text
+        user_input_length = len(user_input)
+        if user_input_length < 4:
+            if user_input.find(self.text) == -1:
+                user_input += self.text
+            else:
+                print("You can only input different numbers")
+                # print_error_message()
 
 
 class ConfirmButton(Button):
@@ -104,10 +111,14 @@ class ConfirmButton(Button):
     def button_action(self):
         global attempts
         global user_input
+        global correct_num
+        global correct_pos
 
         if len(user_input) == 4:
             self.game.compare()
             attempts = self.game.attempts
+            correct_num = self.game.correct_num
+            correct_pos = self.game.correct_pos
             user_input = ""
 
 

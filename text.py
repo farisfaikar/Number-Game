@@ -48,10 +48,12 @@ class Text:
         self.add_line("Enter your guess!", WHITE)
 
         attempts = button.attempts
+        correct_num = button.correct_num
+        correct_pos = button.correct_pos
 
         for x in range(attempts):
-            self.add_line(f"> Attempt #{x + 1}: ({1234}) {2} correct numbers, "
-                          f"{1} correct pos", CYAN)
+            self.add_line(f"> Attempt #{x + 1}: ({1234}) {correct_num} correct numbers, "
+                          f"{correct_pos} correct pos", CYAN)
 
         # self.add_line("You win!", GREEN)
         # self.add_line("Do you wish to restart? [y/n]", BLUE)
