@@ -1,4 +1,4 @@
 # Number_Game
-A little something that I've been working on using pygame
+This is a 4 digit number game where you can guess 4 numbers to win the game!
 
-So, uh... this is supposed to be where all the files are. So it's in the 'master' branch as supposed to the 'main' branch for some reason
+So yea, this looks cleaner... so far. Can't wait to make this whole thing messy again
