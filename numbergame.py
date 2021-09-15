@@ -6,8 +6,10 @@ class Game:
     secret_num = ''
     attempts = 0
     MAX_ATTEMPTS = 8
-    correct_num = 0
-    correct_pos = 0
+    correct_num = []
+    correct_pos = []
+    combinations = []
+    remaining_attempts = 0
 
     def gen_secret_num(self):
         while len(self.secret_num) != 4:
@@ -34,13 +36,11 @@ class Game:
                     correct_pos += 1
                 elif e_num[letter_index] in s_num:
                     correct_num += 1
-            print("There's " + str(correct_num) + " correct numbers, " + str(correct_pos) +
-                  " of them are in the correct position")
             self.attempts += 1
-            remaining_attempts = self.MAX_ATTEMPTS - self.attempts
-            print("Attempts left: " + str(remaining_attempts))
+            self.remaining_attempts = self.MAX_ATTEMPTS - self.attempts
             if self.attempts >= self.MAX_ATTEMPTS:
                 print("You have reached the maximum attempt! You lost")
 
-            self.correct_num = correct_num
-            self.correct_pos = correct_pos
+            self.combinations.append(e_num)
+            self.correct_num.append(correct_num)
+            self.correct_pos.append(correct_pos)

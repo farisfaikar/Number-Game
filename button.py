@@ -20,8 +20,9 @@ PURPLE = (255, 0, 255)
 # User Input
 user_input = ''
 attempts = 0
-correct_num = 0
-correct_pos = 0
+correct_num = []
+correct_pos = []
+combinations = []
 
 
 class Button:
@@ -113,12 +114,14 @@ class ConfirmButton(Button):
         global user_input
         global correct_num
         global correct_pos
+        global combinations
 
         if len(user_input) == 4:
             self.game.compare()
             attempts = self.game.attempts
             correct_num = self.game.correct_num
             correct_pos = self.game.correct_pos
+            combinations = self.game.combinations
             user_input = ""
 
 
