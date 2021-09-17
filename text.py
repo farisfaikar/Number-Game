@@ -2,6 +2,8 @@ import pygame
 import button
 
 # Font
+import numbergame
+
 chary_font = 'chary___.ttf'
 # Color RGB
 BLACK = (0, 0, 0)
@@ -47,10 +49,10 @@ class Text:
         # Add text
         self.add_line("Enter your guess!", WHITE)
 
-        attempts = button.attempts
-        correct_num = button.correct_num
-        correct_pos = button.correct_pos
-        combinations = button.combinations
+        attempts = numbergame.attempts
+        correct_num = numbergame.correct_num
+        correct_pos = numbergame.correct_pos
+        combinations = numbergame.combinations
 
         for i in range(attempts):
             self.add_line(f"> Attempt #{i + 1}: ({combinations[i]}) {correct_num[i]} correct numbers, "
