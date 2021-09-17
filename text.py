@@ -2,6 +2,8 @@ import pygame
 import button
 
 # Font
+import numbergame
+
 chary_font = 'chary___.ttf'
 # Color RGB
 BLACK = (0, 0, 0)
@@ -97,3 +99,16 @@ class TextBox:
         pygame.draw.rect(screen, self.box_color, rect)
         # draw text
         screen.blit(text_surf, text_rect)
+
+
+class TextTest:
+    def write(self):
+        correct_num = numbergame.correct_num
+        correct_pos = numbergame.correct_pos
+        remaining_attempts = numbergame.remaining_attempts
+        combinations = numbergame.combinations
+
+        print(f"Correct Num: {correct_num}")
+        print(f"Correct Pos: {correct_pos}")
+        print(f"Remaining attempts: {remaining_attempts}")
+        print(f"Combinations: {combinations}")

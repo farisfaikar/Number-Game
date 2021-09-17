@@ -1,5 +1,5 @@
 import pygame
-from numbergame import Game
+from numbergame import Game, GameTest
 
 # Font
 chary_font = 'chary___.ttf'
@@ -129,3 +129,13 @@ class ResetButton(Button):
     def button_action(self):
         global user_input
         user_input = ""
+
+
+class ButtonTest(Button):
+    def __init__(self, text, width, height, pos, top_color, bottom_color):
+        super().__init__(text, width, height, pos, top_color, bottom_color)
+        self.game_test = GameTest()
+
+    def button_action(self):
+        self.game_test.compare()
+

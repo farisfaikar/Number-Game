@@ -1,6 +1,11 @@
 import random
 import button
 
+correct_num = []
+correct_pos = []
+combinations = []
+remaining_attempts = 0
+
 
 class Game:
     secret_num = ''
@@ -44,3 +49,18 @@ class Game:
             self.combinations.append(e_num)
             self.correct_num.append(correct_num)
             self.correct_pos.append(correct_pos)
+
+
+class GameTest:
+    def compare(self):  # we only need to execute this once
+        # let's just say we got this through the logic
+        entered_num_ = 1324
+        correct_num_ = 3
+        correct_pos_ = 2
+        rem_attempts = 6
+
+        combinations.append(entered_num_)
+        correct_num.append(correct_num_)
+        correct_pos.append(correct_pos_)
+        global remaining_attempts
+        remaining_attempts = rem_attempts
