@@ -1,6 +1,6 @@
 import pygame, sys
 import text
-from button import Button, ConfirmButton, ResetButton, ButtonTest
+from button import Button, ConfirmButton, ResetButton
 
 # Global RGB (this shouldn't be here, idk where to put it though)
 BLACK = (0, 0, 0)
@@ -43,8 +43,6 @@ class Program:
         self.text_box = text.TextBox(110, 30, (600, 155), BLACK, WHITE)
 
         # Enter experimental instances here
-        self.button_test = ButtonTest("test", 100, 30, (200, 200), BLUE, D_BLUE)
-        self.text_test = text.TextTest()
 
     def run(self):  # This bad boy runs every frame -------------------------------
         # Enter functions here
@@ -69,8 +67,6 @@ class Program:
         self.text_box.draw(screen)
 
         # Enter experimental functions here
-        self.button_test.draw(screen)
-        self.text_test.write()
 
 
 # Executables -------------------------------------------------------------

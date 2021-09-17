@@ -1,5 +1,5 @@
 import pygame
-from numbergame import Game, GameTest
+from numbergame import Game
 
 # Font
 chary_font = 'chary___.ttf'
@@ -34,6 +34,9 @@ class Button:
         self.original_y_pos = pos[1]
         self.text = text
         self.pos = pos
+
+        # Initiate game
+        self.game = Game()
 
         # top rectangle
         self.top_rect = pygame.Rect(pos, (width, height))
@@ -72,7 +75,6 @@ class Button:
         pygame.draw.rect(screen, self.top_color, self.top_rect, border_radius=5)
 
         # screen.blit(self.trans_rect, self.pos)
-
         screen.blit(self.text_surf, self.text_rect)
         self.check_click()
 
@@ -105,23 +107,11 @@ class Button:
 
 
 class ConfirmButton(Button):
-    def __init__(self, text, width, height, pos, top_color, bottom_color):
-        super().__init__(text, width, height, pos, top_color, bottom_color)
-        self.game = Game()
-
     def button_action(self):
-        global attempts
         global user_input
-        global correct_num
-        global correct_pos
-        global combinations
 
         if len(user_input) == 4:
             self.game.compare()
-            attempts = self.game.attempts
-            correct_num = self.game.correct_num
-            correct_pos = self.game.correct_pos
-            combinations = self.game.combinations
             user_input = ""
 
 
@@ -129,13 +119,3 @@ class ResetButton(Button):
     def button_action(self):
         global user_input
         user_input = ""
-
-
-class ButtonTest(Button):
-    def __init__(self, text, width, height, pos, top_color, bottom_color):
-        super().__init__(text, width, height, pos, top_color, bottom_color)
-        self.game_test = GameTest()
-
-    def button_action(self):
-        self.game_test.compare()
-

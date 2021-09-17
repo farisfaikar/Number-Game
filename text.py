@@ -49,10 +49,10 @@ class Text:
         # Add text
         self.add_line("Enter your guess!", WHITE)
 
-        attempts = button.attempts
-        correct_num = button.correct_num
-        correct_pos = button.correct_pos
-        combinations = button.combinations
+        attempts = numbergame.attempts
+        correct_num = numbergame.correct_num
+        correct_pos = numbergame.correct_pos
+        combinations = numbergame.combinations
 
         for i in range(attempts):
             self.add_line(f"> Attempt #{i + 1}: ({combinations[i]}) {correct_num[i]} correct numbers, "
@@ -99,16 +99,3 @@ class TextBox:
         pygame.draw.rect(screen, self.box_color, rect)
         # draw text
         screen.blit(text_surf, text_rect)
-
-
-class TextTest:
-    def write(self):
-        correct_num = numbergame.correct_num
-        correct_pos = numbergame.correct_pos
-        remaining_attempts = numbergame.remaining_attempts
-        combinations = numbergame.combinations
-
-        print(f"Correct Num: {correct_num}")
-        print(f"Correct Pos: {correct_pos}")
-        print(f"Remaining attempts: {remaining_attempts}")
-        print(f"Combinations: {combinations}")

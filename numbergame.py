@@ -4,17 +4,13 @@ import button
 correct_num = []
 correct_pos = []
 combinations = []
+attempts = 0
 remaining_attempts = 0
 
 
 class Game:
     secret_num = ''
-    attempts = 0
     MAX_ATTEMPTS = 8
-    correct_num = []
-    correct_pos = []
-    combinations = []
-    remaining_attempts = 0
 
     def gen_secret_num(self):
         while len(self.secret_num) != 4:
@@ -27,40 +23,29 @@ class Game:
     def compare(self):
         self.gen_secret_num()
 
-        s_num = self.secret_num
-        e_num = button.user_input
-        correct_num = 0
-        correct_pos = 0
-        if e_num == s_num:
+        secret_num = self.secret_num
+        entered_num = button.user_input
+        correct_num_ = 0
+        correct_pos_ = 0
+
+        global attempts
+        global remaining_attempts
+
+        if entered_num == secret_num:
             print("You win!")
         else:
-            for letter in e_num:
-                letter_index = e_num.find(letter)
-                if letter == s_num[letter_index]:
-                    correct_num += 1
-                    correct_pos += 1
-                elif e_num[letter_index] in s_num:
-                    correct_num += 1
-            self.attempts += 1
-            self.remaining_attempts = self.MAX_ATTEMPTS - self.attempts
-            if self.attempts >= self.MAX_ATTEMPTS:
+            for letter in entered_num:
+                letter_index = entered_num.find(letter)
+                if letter == secret_num[letter_index]:
+                    correct_num_ += 1
+                    correct_pos_ += 1
+                elif entered_num[letter_index] in secret_num:
+                    correct_num_ += 1
+            attempts += 1
+            remaining_attempts = self.MAX_ATTEMPTS - attempts
+            if attempts >= self.MAX_ATTEMPTS:
                 print("You have reached the maximum attempt! You lost")
 
-            self.combinations.append(e_num)
-            self.correct_num.append(correct_num)
-            self.correct_pos.append(correct_pos)
-
-
-class GameTest:
-    def compare(self):  # we only need to execute this once
-        # let's just say we got this through the logic
-        entered_num_ = 1324
-        correct_num_ = 3
-        correct_pos_ = 2
-        rem_attempts = 6
-
-        combinations.append(entered_num_)
-        correct_num.append(correct_num_)
-        correct_pos.append(correct_pos_)
-        global remaining_attempts
-        remaining_attempts = rem_attempts
+            combinations.append(entered_num)
+            correct_num.append(correct_num_)
+            correct_pos.append(correct_pos_)
