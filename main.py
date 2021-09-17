@@ -40,8 +40,9 @@ class Program:
         self.button9 = Button("9", 30, 30, (680, 290), L_GREY, GREY)
         self.button0 = Button("0", 30, 30, (640, 335), L_GREY, GREY)
 
-        # Enter experimental instances here
         self.text_box = text.TextBox(110, 30, (600, 155), BLACK, WHITE)
+
+        # Enter experimental instances here
 
     def run(self):  # This bad boy runs every frame -------------------------------
         # Enter functions here
@@ -63,8 +64,9 @@ class Program:
         self.button9.draw(screen)
         self.button0.draw(screen)
 
-        # Enter experimental functions here
         self.text_box.draw(screen)
+
+        # Enter experimental functions here
 
 
 # Executables -------------------------------------------------------------
