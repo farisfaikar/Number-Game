@@ -9,32 +9,33 @@ MAX_ATTEMPTS = 8
 remaining_attempts = MAX_ATTEMPTS
 is_win = False
 is_lost = False
+secret_num = ""
 
 
 class Game:
-    secret_num = ''
+    @staticmethod
+    def gen_secret_num():
+        global secret_num
 
-    def gen_secret_num(self):
-        while len(self.secret_num) != 4:
+        while len(secret_num) != 4:
             r_num = str(random.randint(0, 9))
-            if r_num in self.secret_num:
+            if r_num in secret_num:
                 continue
             else:
-                self.secret_num = self.secret_num + r_num
+                secret_num = secret_num + r_num
 
     def compare(self):
         self.gen_secret_num()
-        # print(f"Secret Number: {self.secret_num}")
 
-        secret_num = self.secret_num
-        entered_num = button.user_input
-        correct_num_ = 0
-        correct_pos_ = 0
-
+        global secret_num
         global attempts
         global remaining_attempts
         global is_win
         global is_lost
+
+        entered_num = button.user_input
+        correct_num_ = 0
+        correct_pos_ = 0
 
         if entered_num == secret_num:
             print("You win!")
@@ -64,6 +65,7 @@ class Game:
         global is_win
         global is_lost
         global remaining_attempts
+        global secret_num
 
         correct_num = []
         correct_pos = []
@@ -72,3 +74,5 @@ class Game:
         is_win = False
         is_lost = False
         remaining_attempts = MAX_ATTEMPTS
+        secret_num = ''
+        self.gen_secret_num()

@@ -1,5 +1,4 @@
 import pygame
-
 import numbergame
 from numbergame import Game
 
@@ -20,13 +19,12 @@ RED = (255, 150, 150)
 YELLOW = (255, 255, 150)
 PURPLE = (255, 0, 255)
 # User Input
-user_input = ''
+user_input = ""
 attempts = 0
 correct_num = []
 correct_pos = []
 combinations = []
 error_message = ""
-is_restart = False
 
 
 class Button:
@@ -125,7 +123,4 @@ class ResetButton(Button):
 
 class RestartButton(Button):
     def button_action(self):
-        global is_restart
-        is_restart = True
-
         self.game.restart()
