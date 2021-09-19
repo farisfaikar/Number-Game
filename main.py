@@ -25,7 +25,6 @@ class Program:
         self.rect = text.Rect()
         self.text = text.Text()
 
-        # Enter beta version instances here
         self.confirm_button = ConfirmButton("C", 30, 30, (680, 335), GREEN, D_GREEN)
         self.reset_button = ResetButton("X", 30, 30, (600, 335), RED, D_RED)
         self.restart_button = RestartButton("R", 30, 30, (10, 10), BLUE, D_BLUE)
@@ -50,7 +49,6 @@ class Program:
         self.rect.draw_ui_rect(screen)
         self.text.draw_text(screen)
 
-        # Enter beta version functions here
         self.confirm_button.draw(screen)
         self.reset_button.draw(screen)
         self.restart_button.draw(screen)
