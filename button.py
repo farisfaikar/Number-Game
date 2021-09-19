@@ -1,4 +1,6 @@
 import pygame
+
+import numbergame
 from numbergame import Game
 
 # Font
@@ -23,6 +25,8 @@ attempts = 0
 correct_num = []
 correct_pos = []
 combinations = []
+error_message = ""
+is_restart = False
 
 
 class Button:
@@ -47,14 +51,8 @@ class Button:
         self.bottom_rect = pygame.Rect(pos, (width, height))
         self.bottom_color = bottom_color
 
-        # ghost rectangle
-        self.ghost_rect = pygame.Rect(pos, (width, height))
-        self.ghost_color = XL_GREY  # this color should be the same as the background rect color (ghetto solution)
-
-        # transparent rectangle
-        # self.trans_rect = pygame.Surface((width, height))
-        # self.trans_rect.set_alpha(128)  # set transparency
-        # self.trans_rect.fill(YELLOW)
+        # hitbox rectangle
+        self.hitbox_rect = pygame.Rect(pos, (width, height))
 
         # text
         gui_font = pygame.font.Font(chary_font, 20)
@@ -65,22 +63,21 @@ class Button:
         # elevation logic
         self.top_rect.y = self.original_y_pos - self.dynamic_elevation
         self.text_rect.center = self.top_rect.center
-        self.ghost_rect.y = self.original_y_pos - self.elevation
+        self.hitbox_rect.y = self.original_y_pos - self.elevation
 
         self.bottom_rect.midtop = self.top_rect.midtop
         self.bottom_rect.height = self.top_rect.height + self.dynamic_elevation
 
-        pygame.draw.rect(screen, self.ghost_color, self.ghost_rect, border_radius=5)
         pygame.draw.rect(screen, self.bottom_color, self.bottom_rect, border_radius=5)
         pygame.draw.rect(screen, self.top_color, self.top_rect, border_radius=5)
 
-        # screen.blit(self.trans_rect, self.pos)
         screen.blit(self.text_surf, self.text_rect)
         self.check_click()
 
     def check_click(self):
         mouse_pos = pygame.mouse.get_pos()
-        if self.ghost_rect.collidepoint(mouse_pos):
+
+        if self.hitbox_rect.collidepoint(mouse_pos):
             self.top_color = WHITE
             if pygame.mouse.get_pressed(num_buttons=3)[0]:
                 self.dynamic_elevation = 0
@@ -97,25 +94,38 @@ class Button:
 
     def button_action(self):
         global user_input
+        global error_message
         user_input_length = len(user_input)
         if user_input_length < 4:
             if user_input.find(self.text) == -1:
                 user_input += self.text
             else:
-                print("You can only input different numbers")
-                # print_error_message()
+                error_message = "You can only input different numbers"
 
 
 class ConfirmButton(Button):
     def button_action(self):
         global user_input
+        global error_message
 
         if len(user_input) == 4:
-            self.game.compare()
+            if not numbergame.is_win and not numbergame.is_lost:
+                self.game.compare()
             user_input = ""
+            error_message = ""
+        else:
+            error_message = "You need to input 4 numbers"
 
 
 class ResetButton(Button):
     def button_action(self):
         global user_input
         user_input = ""
+
+
+class RestartButton(Button):
+    def button_action(self):
+        global is_restart
+        is_restart = True
+
+        self.game.restart()

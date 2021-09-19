@@ -1,6 +1,6 @@
 import pygame, sys
 import text
-from button import Button, ConfirmButton, ResetButton
+from button import Button, ConfirmButton, ResetButton, RestartButton
 
 # Global RGB (this shouldn't be here, idk where to put it though)
 BLACK = (0, 0, 0)
@@ -28,6 +28,7 @@ class Program:
         # Enter beta version instances here
         self.confirm_button = ConfirmButton("C", 30, 30, (680, 335), GREEN, D_GREEN)
         self.reset_button = ResetButton("X", 30, 30, (600, 335), RED, D_RED)
+        self.restart_button = RestartButton("R", 30, 30, (10, 10), BLUE, D_BLUE)
 
         self.button1 = Button("1", 30, 30, (600, 200), L_GREY, GREY)
         self.button2 = Button("2", 30, 30, (640, 200), L_GREY, GREY)
@@ -52,6 +53,7 @@ class Program:
         # Enter beta version functions here
         self.confirm_button.draw(screen)
         self.reset_button.draw(screen)
+        self.restart_button.draw(screen)
 
         self.button1.draw(screen)
         self.button2.draw(screen)

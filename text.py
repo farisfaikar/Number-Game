@@ -1,9 +1,8 @@
 import pygame
 import button
-
-# Font
 import numbergame
 
+# Font
 chary_font = 'chary___.ttf'
 # Color RGB
 BLACK = (0, 0, 0)
@@ -42,27 +41,20 @@ class Text:
         self.text_space = 20
         self.textX = 10  # initial x position
         self.textY = 155  # initial y position
-        self.textY_addable = self.textY - self.text_space  # stored y position (is added every time a new line is added)
+        self.textY_addable = 0
+        self.reset_text_y_pos()
 
     def draw_text(self, screen):
         self.screen = screen
         # Add text
-        self.add_line("Enter your guess!", WHITE)
+        self.add_line(f"Enter your guess! You have {numbergame.remaining_attempts} attempts left", WHITE)
+        self.add_custom_line("Restart", BLUE, 50, 10)
 
-        attempts = numbergame.attempts
-        correct_num = numbergame.correct_num
-        correct_pos = numbergame.correct_pos
-        combinations = numbergame.combinations
+        self.print_error_message()
+        self.print_clue_texts()
+        self.print_win_message()
 
-        for i in range(attempts):
-            self.add_line(f"> Attempt #{i + 1}: ({combinations[i]}) {correct_num[i]} correct numbers, "
-                          f"{correct_pos[i]} correct pos", CYAN)
-
-        # self.add_line("You win!", GREEN)
-        # self.add_line("Do you wish to restart? [y/n]", BLUE)
-
-        # reset textY position
-        self.textY_addable = self.textY - self.text_space
+        self.reset_text_y_pos()
 
     def add_line(self, text, color):
         # Hard-coded font
@@ -78,6 +70,37 @@ class Text:
         # Render text
         line = chary.render(text, True, color)
         self.screen.blit(line, (x, y))
+
+    def reset_text_y_pos(self):
+        self.textY_addable = self.textY - self.text_space
+
+    def print_error_message(self):
+        if len(button.error_message) != 0:
+            error_message = f"ERROR: {button.error_message}"
+            self.add_line(error_message, RED)
+        else:
+            self.add_line("", RED)
+
+    def print_clue_texts(self):
+        attempts = numbergame.attempts
+        correct_num = numbergame.correct_num
+        correct_pos = numbergame.correct_pos
+        combinations = numbergame.combinations
+
+        for i in range(attempts):
+            self.add_line(f"> Attempt #{i + 1}: ({combinations[i]}) {correct_num[i]} correct numbers, "
+                          f"{correct_pos[i]} correct pos", CYAN)
+
+    def print_win_message(self):
+        is_win = numbergame.is_win
+        is_lost = numbergame.is_lost
+
+        if is_win:
+            self.add_line("You win!", GREEN)
+        if is_lost:
+            self.add_line("You have reached the maximum attempt! You lost", RED)
+        if is_win or is_lost:
+            self.add_line("Hit the restart button to play again", BLUE)
 
 
 class TextBox:

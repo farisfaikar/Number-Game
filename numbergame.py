@@ -5,12 +5,14 @@ correct_num = []
 correct_pos = []
 combinations = []
 attempts = 0
-remaining_attempts = 0
+MAX_ATTEMPTS = 8
+remaining_attempts = MAX_ATTEMPTS
+is_win = False
+is_lost = False
 
 
 class Game:
     secret_num = ''
-    MAX_ATTEMPTS = 8
 
     def gen_secret_num(self):
         while len(self.secret_num) != 4:
@@ -22,6 +24,7 @@ class Game:
 
     def compare(self):
         self.gen_secret_num()
+        # print(f"Secret Number: {self.secret_num}")
 
         secret_num = self.secret_num
         entered_num = button.user_input
@@ -30,9 +33,12 @@ class Game:
 
         global attempts
         global remaining_attempts
+        global is_win
+        global is_lost
 
         if entered_num == secret_num:
             print("You win!")
+            is_win = True
         else:
             for letter in entered_num:
                 letter_index = entered_num.find(letter)
@@ -42,10 +48,27 @@ class Game:
                 elif entered_num[letter_index] in secret_num:
                     correct_num_ += 1
             attempts += 1
-            remaining_attempts = self.MAX_ATTEMPTS - attempts
-            if attempts >= self.MAX_ATTEMPTS:
-                print("You have reached the maximum attempt! You lost")
+            remaining_attempts = MAX_ATTEMPTS - attempts
+            if attempts >= MAX_ATTEMPTS:
+                is_lost = True
 
             combinations.append(entered_num)
             correct_num.append(correct_num_)
             correct_pos.append(correct_pos_)
+
+    def restart(self):
+        global correct_num
+        global correct_pos
+        global combinations
+        global attempts
+        global is_win
+        global is_lost
+        global remaining_attempts
+
+        correct_num = []
+        correct_pos = []
+        combinations = []
+        attempts = 0
+        is_win = False
+        is_lost = False
+        remaining_attempts = MAX_ATTEMPTS
