@@ -1,6 +1,6 @@
 import pygame, sys
 import text
-from button import Button, ConfirmButton, ResetButton, RestartButton
+from button import Button, ConfirmButton, ResetButton, RestartButton, HighscoreButton
 from colorpalette import *
 
 
@@ -10,10 +10,11 @@ class Program:
         self.rect = text.Rect()
         self.text = text.Text()
 
-        self.restart_button = RestartButton("R", 30, 30, (10, 10), BLUE, D_BLUE)
+        self.restart_button = RestartButton("Restart", 110, 30, (680, screen_height - 35), BLUE, D_BLUE)
+        self.highscore_button = HighscoreButton("Highscores", 110, 30, (680, screen_height - 75), YELLOW, D_YELLOW)
 
         self.grid_pos = []
-        self.set_numpad_pos(680, 180)
+        self.set_numpad_pos(680, 35)
 
         # Enter the coordinates using -> grid_pos[x][y]
         self.text_box = text.TextBox(110, 30, (self.grid_pos[0][0]), BLACK, WHITE)
@@ -39,6 +40,7 @@ class Program:
 
         self.draw_numpad()
         self.restart_button.draw(screen)
+        self.highscore_button.draw(screen)
 
         # Enter experimental functions here
     
@@ -90,7 +92,7 @@ if __name__ == '__main__':
     program = Program()
 
     # Set caption, icon, color
-    pygame.display.set_caption("Better Formatting: Number Game!")
+    pygame.display.set_caption("Number Game!")
     pygame.display.set_icon(icon)
 
     # Main loop (runs every tick) -------------------------------------------------
