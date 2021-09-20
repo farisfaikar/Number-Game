@@ -1,22 +1,7 @@
 import pygame, sys
 import text
 from button import Button, ConfirmButton, ResetButton, RestartButton
-
-# Global RGB (this shouldn't be here, idk where to put it though)
-BLACK = (0, 0, 0)
-GREY = (50, 50, 50)
-L_GREY = (100, 100, 100)
-D_GREY = (25, 25, 25)
-WHITE = (255, 255, 255)
-BLUE = (150, 150, 255)
-D_BLUE = (100, 100, 200)
-CYAN = (150, 255, 255)
-GREEN = (150, 255, 150)
-D_GREEN = (100, 200, 100)
-RED = (255, 150, 150)
-D_RED = (200, 100, 100)
-YELLOW = (255, 255, 150)
-PURPLE = (255, 0, 255)
+from colorpalette import *
 
 
 class Program:
@@ -27,22 +12,23 @@ class Program:
 
         self.restart_button = RestartButton("R", 30, 30, (10, 10), BLUE, D_BLUE)
 
-        self.set_numpad_pos(0, 0)
+        self.grid_pos = []
+        self.set_numpad_pos(680, 180)
 
-        self.button1 = Button("1", 30, 30, (680, 215), L_GREY, GREY)
-        self.button2 = Button("2", 30, 30, (720, 215), L_GREY, GREY)
-        self.button3 = Button("3", 30, 30, (760, 215), L_GREY, GREY)
-        self.button4 = Button("4", 30, 30, (680, 260), L_GREY, GREY)
-        self.button5 = Button("5", 30, 30, (720, 260), L_GREY, GREY)
-        self.button6 = Button("6", 30, 30, (760, 260), L_GREY, GREY)
-        self.button7 = Button("7", 30, 30, (680, 305), L_GREY, GREY)
-        self.button8 = Button("8", 30, 30, (720, 305), L_GREY, GREY)
-        self.button9 = Button("9", 30, 30, (760, 305), L_GREY, GREY)
-        self.button0 = Button("0", 30, 30, (720, 350), L_GREY, GREY)
-        self.reset_button = ResetButton("X", 30, 30, (680, 350), RED, D_RED)
-        self.confirm_button = ConfirmButton("C", 30, 30, (760, 350), GREEN, D_GREEN)
-
-        self.text_box = text.TextBox(110, 30, (600, 155), BLACK, WHITE)
+        # Enter the coordinates using -> grid_pos[x][y]
+        self.text_box = text.TextBox(110, 30, (self.grid_pos[0][0]), BLACK, WHITE)
+        self.button1 = Button("1", 30, 30, (self.grid_pos[0][1]), L_GREY, GREY)
+        self.button2 = Button("2", 30, 30, (self.grid_pos[1][1]), L_GREY, GREY)
+        self.button3 = Button("3", 30, 30, (self.grid_pos[2][1]), L_GREY, GREY)
+        self.button4 = Button("4", 30, 30, (self.grid_pos[0][2]), L_GREY, GREY)
+        self.button5 = Button("5", 30, 30, (self.grid_pos[1][2]), L_GREY, GREY)
+        self.button6 = Button("6", 30, 30, (self.grid_pos[2][2]), L_GREY, GREY)
+        self.button7 = Button("7", 30, 30, (self.grid_pos[0][3]), L_GREY, GREY)
+        self.button8 = Button("8", 30, 30, (self.grid_pos[1][3]), L_GREY, GREY)
+        self.button9 = Button("9", 30, 30, (self.grid_pos[2][3]), L_GREY, GREY)
+        self.button0 = Button("0", 30, 30, (self.grid_pos[1][4]), L_GREY, GREY)
+        self.reset_button = ResetButton("X", 30, 30, (self.grid_pos[0][4]), RED, D_RED)
+        self.confirm_button = ConfirmButton("C", 30, 30, (self.grid_pos[2][4]), GREEN, D_GREEN)
 
         # Enter experimental instances here
 
@@ -51,14 +37,12 @@ class Program:
         self.rect.draw_ui_rect(screen)
         self.text.draw_text(screen)
 
-        self.draw_numpad(screen)
-
+        self.draw_numpad()
         self.restart_button.draw(screen)
-        
 
         # Enter experimental functions here
     
-    def draw_numpad(self, screen):
+    def draw_numpad(self):
         self.text_box.draw(screen)
         self.confirm_button.draw(screen)
         self.reset_button.draw(screen)
@@ -75,10 +59,6 @@ class Program:
         self.button0.draw(screen)
 
     def set_numpad_pos(self, initial_x, initial_y):
-        grid_x = []
-        grid_y = []
-        grid_x.append(initial_x)
-        grid_y.append(initial_y)
         dynamic_x = initial_x
         dynamic_y = initial_y
         column_count = 3
@@ -86,15 +66,14 @@ class Program:
         x_space = 40
         y_space = 45
 
-        for x in range(column_count - 1):
-            grid_x.append(dynamic_x + x_space)
+        # Create a 3d list containing the button grid coordinates
+        for x in range(column_count):
+            self.grid_pos.append([])
+            for y in range(row_count):
+                self.grid_pos[x].append([dynamic_x, dynamic_y])
+                dynamic_y += y_space
+            dynamic_y = initial_y
             dynamic_x += x_space
-        for y in range(row_count - 1):
-            grid_y.append(dynamic_y + y_space)
-            dynamic_y += y_space
-
-        print(f"grid_x: {grid_x}")
-        print(f"grid_y: {grid_y}")
 
 
 # Executables -------------------------------------------------------------

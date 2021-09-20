@@ -1,38 +1,19 @@
 import pygame
 import button
 import numbergame
+from colorpalette import *
 
 # Font
 chary_font = 'chary___.ttf'
-# Color RGB
-BLACK = (0, 0, 0)
-GREY = (50, 50, 50)
-L_GREY = (100, 100, 100)
-XL_GREY = (150, 150, 150)
-D_GREY = (25, 25, 25)
-WHITE = (255, 255, 255)
-BLUE = (150, 150, 255)
-D_BLUE = (100, 100, 200)
-CYAN = (150, 255, 255)
-GREEN = (150, 255, 150)
-D_GREEN = (100, 200, 100)
-XD_GREEN = (50, 150, 50)
-RED = (255, 150, 150)
-YELLOW = (255, 255, 150)
-PURPLE = (255, 0, 255)
 # Time
 elapsed_time = 0
-# Black display (may need to relocate this variable)
-black_display = None
 
 
 class Rect:
     @staticmethod
     def draw_ui_rect(screen):
-        pygame.draw.rect(screen, L_GREY, (0, 0, 800, 145))  # 'screen' rect
-        pygame.draw.rect(screen, XL_GREY, (520, 145, 280, 300))  # 'calculator' rect
-        global black_display
-        black_display = pygame.draw.rect(screen, BLACK, (600, 155, 110, 30))
+        pygame.draw.rect(screen, L_GREY, (0, 0, 800, 170))  # 'screen' rect
+        pygame.draw.rect(screen, XL_GREY, (670, 170, 280, 300))  # 'calculator' rect
 
 
 class Text:
@@ -40,7 +21,7 @@ class Text:
         self.screen = None
         self.text_space = 20
         self.textX = 10  # initial x position
-        self.textY = 155  # initial y position
+        self.textY = 175  # initial y position
         self.textY_addable = 0
         self.reset_text_y_pos()
 

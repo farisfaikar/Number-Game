@@ -1,23 +1,10 @@
 import pygame
 import numbergame
 from numbergame import Game
+from colorpalette import *
 
 # Font
 chary_font = 'chary___.ttf'
-# Color RGB
-BLACK = (0, 0, 0)
-GREY = (50, 50, 50)
-L_GREY = (100, 100, 100)
-XL_GREY = (150, 150, 150)
-D_GREY = (25, 25, 25)
-WHITE = (255, 255, 255)
-BLUE = (150, 150, 255)
-D_BLUE = (100, 100, 200)
-CYAN = (150, 255, 255)
-GREEN = (150, 255, 150)
-RED = (255, 150, 150)
-YELLOW = (255, 255, 150)
-PURPLE = (255, 0, 255)
 # User Input
 user_input = ""
 attempts = 0
