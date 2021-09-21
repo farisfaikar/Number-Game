@@ -84,8 +84,11 @@ class Button:
         if user_input_length < 4:
             if user_input.find(self.text) == -1:
                 user_input += self.text
+                error_message = ""
             else:
                 error_message = "You can only input different numbers"
+        else:
+            error_message = "You can only input up to 4 digits"
 
 
 class ConfirmButton(Button):
@@ -111,3 +114,10 @@ class ResetButton(Button):
 class RestartButton(Button):
     def button_action(self):
         self.game.restart()
+        global error_message
+        error_message = ""
+
+
+class HighscoreButton(Button):
+    def button_action(self):
+        print("display highscore")

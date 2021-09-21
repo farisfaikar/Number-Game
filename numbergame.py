@@ -32,6 +32,7 @@ class Game:
         global remaining_attempts
         global is_win
         global is_lost
+        # print(secret_num)  # debug print out secret number
 
         entered_num = button.user_input
         correct_num_ = 0
