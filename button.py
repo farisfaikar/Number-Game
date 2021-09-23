@@ -13,6 +13,7 @@ correct_num = []
 correct_pos = []
 combinations = []
 error_message = ""
+text_id = {"clue_text" : True, "highscore" : False}
 
 
 class Button:
@@ -117,9 +118,14 @@ class RestartButton(Button):
         self.game.restart()
         timer.reset_timer()
         global error_message
+        global text_id
         error_message = ""
-
+        text_id["clue_text"] = True
+        text_id["highscore"] = False
 
 class HighscoreButton(Button):
     def button_action(self):
-        print("display highscore")
+        timer.stop_timer()
+        global text_id
+        text_id["highscore"] = True
+        text_id["clue_text"] = False

@@ -6,6 +6,7 @@ static_time = 0
 seconds = ""
 minutes = ""
 hours = ""
+is_timer_running = True
 
 
 def count_up():
@@ -19,13 +20,14 @@ def count_up():
     global minutes
     global hours
 
-    if not numbergame.is_win and not numbergame.is_lost:
+    if is_timer_running:
         seconds = add_0(seconds_)
         minutes = add_0(minutes_)
         hours = add_0(hours_)
 
 
 def reset_timer():
+    start_timer()
     global static_time
     static_time = pygame.time.get_ticks()
 
@@ -35,3 +37,11 @@ def add_0(num):
         return f"0{num}"
     else:
         return f"{num}"
+
+def stop_timer():
+    global is_timer_running
+    is_timer_running = False
+
+def start_timer():
+    global is_timer_running
+    is_timer_running = True

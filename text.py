@@ -21,8 +21,11 @@ class Text:
         self.screen = screen
         # Add text
         self.print_time()
-        self.print_clue_texts()
-        self.print_highscores()
+
+        if button.text_id["clue_text"]:
+            self.print_clue_texts()
+        elif button.text_id["highscore"]:
+            self.print_highscores()
 
         self.reset_text_y_pos()
 
@@ -66,6 +69,8 @@ class Text:
             self.add_line(f"> Attempt #{i + 1}: {correct_num[i]} correct numbers, "
                           f"{correct_pos[i]} are in the correct position. [{combinations[i]}]", CYAN)
 
+        self.print_win_message()
+
     def print_win_message(self):
         is_win = numbergame.is_win
         is_lost = numbergame.is_lost
@@ -76,6 +81,7 @@ class Text:
             self.add_line(f"You have run out of attempt! You lost. The correct number was {numbergame.secret_num}", RED)
         if is_win or is_lost:
             self.add_line("Press the restart button to play again", BLUE)
+            timer.stop_timer()
 
     def print_highscores(self):
         self.add_line("Highscores!", YELLOW)
