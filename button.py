@@ -1,5 +1,6 @@
 import pygame
 import numbergame
+import timer
 from numbergame import Game
 from colorpalette import *
 
@@ -18,7 +19,7 @@ class Button:
     def __init__(self, text, width, height, pos, top_color, bottom_color):
         # Core attributes
         self.pressed = False
-        self.elevation = 5
+        self.elevation = 4
         self.dynamic_elevation = self.elevation
         self.original_y_pos = pos[1]
         self.text = text
@@ -114,6 +115,7 @@ class ResetButton(Button):
 class RestartButton(Button):
     def button_action(self):
         self.game.restart()
+        timer.reset_timer()
         global error_message
         error_message = ""
 

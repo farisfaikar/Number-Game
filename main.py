@@ -1,23 +1,23 @@
 import pygame, sys
-import text
+from text import Text, TextBox
 from button import Button, ConfirmButton, ResetButton, RestartButton, HighscoreButton
 from colorpalette import *
+import timer
 
 
 class Program:
     def __init__(self):
         # Enter instances here -----------------------------------------------------
-        self.rect = text.Rect()
-        self.text = text.Text()
+        self.text = Text()
 
         self.restart_button = RestartButton("Restart", 110, 30, (680, screen_height - 35), BLUE, D_BLUE)
         self.highscore_button = HighscoreButton("Highscores", 110, 30, (680, screen_height - 75), YELLOW, D_YELLOW)
 
         self.grid_pos = []
-        self.set_numpad_pos(680, 35)
+        self.set_numpad_pos(680, 40)
 
         # Enter the coordinates using -> grid_pos[x][y]
-        self.text_box = text.TextBox(110, 30, (self.grid_pos[0][0]), BLACK, WHITE)
+        self.text_box = TextBox(110, 30, (self.grid_pos[0][0]), BLACK, WHITE)
         self.button1 = Button("1", 30, 30, (self.grid_pos[0][1]), L_GREY, GREY)
         self.button2 = Button("2", 30, 30, (self.grid_pos[1][1]), L_GREY, GREY)
         self.button3 = Button("3", 30, 30, (self.grid_pos[2][1]), L_GREY, GREY)
@@ -35,7 +35,8 @@ class Program:
 
     def run(self):  # This bad boy runs every frame -------------------------------
         # Enter functions here
-        self.rect.draw_ui_rect(screen)
+        timer.count_up()
+        self.draw_ui_rect()
         self.text.draw_text(screen)
 
         self.draw_numpad()
@@ -43,6 +44,12 @@ class Program:
         self.highscore_button.draw(screen)
 
         # Enter experimental functions here
+
+    @staticmethod
+    def draw_ui_rect():  # this will be replaced with a proper background
+        pygame.draw.rect(screen, XL_GREY, (670, 0, 280, 400))  # 'calculator' rect
+        pygame.draw.rect(screen, D_RED, (670, 0, 130, 30))  # 'timer' rect
+        pygame.draw.rect(screen, L_GREY, (670, 260, 130, 140))  # 'timer' rect
     
     def draw_numpad(self):
         self.text_box.draw(screen)
