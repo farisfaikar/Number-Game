@@ -1,7 +1,6 @@
 import pygame
 import numbergame
 import timer
-from numbergame import Game
 from colorpalette import *
 
 # Font
@@ -13,7 +12,7 @@ correct_num = []
 correct_pos = []
 combinations = []
 error_message = ""
-text_id = {"clue_text" : True, "highscore" : False}
+text_id = {"clue_text": True, "highscore": False}
 
 
 class Button:
@@ -25,9 +24,6 @@ class Button:
         self.original_y_pos = pos[1]
         self.text = text
         self.pos = pos
-
-        # Initiate game
-        self.game = Game()
 
         # top rectangle
         self.top_rect = pygame.Rect(pos, (width, height))
@@ -100,7 +96,7 @@ class ConfirmButton(Button):
 
         if len(user_input) == 4:
             if not numbergame.is_win and not numbergame.is_lost:
-                self.game.compare()
+                numbergame.compare()
             user_input = ""
             error_message = ""
         else:
@@ -115,7 +111,7 @@ class ResetButton(Button):
 
 class RestartButton(Button):
     def button_action(self):
-        self.game.restart()
+        numbergame.restart()
         timer.reset_timer()
         global error_message
         global text_id
@@ -123,9 +119,15 @@ class RestartButton(Button):
         text_id["clue_text"] = True
         text_id["highscore"] = False
 
+
 class HighscoreButton(Button):
     def button_action(self):
         timer.stop_timer()
         global text_id
         text_id["highscore"] = True
         text_id["clue_text"] = False
+
+
+class AchievementButton(Button):
+    def button_action(self):
+        print("Display Achievements")

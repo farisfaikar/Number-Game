@@ -1,0 +1,2 @@
+You won and this should store the player's name and time
+in a list or a dictionary

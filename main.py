@@ -1,6 +1,6 @@
 import pygame, sys
 from text import Text, TextBox
-from button import Button, ConfirmButton, ResetButton, RestartButton, HighscoreButton
+from button import Button, ConfirmButton, ResetButton, RestartButton, HighscoreButton, AchievementButton
 from colorpalette import *
 import timer
 
@@ -10,8 +10,9 @@ class Program:
         # Enter instances here -----------------------------------------------------
         self.text = Text()
 
-        self.restart_button = RestartButton("Restart", 110, 30, (680, screen_height - 35), BLUE, D_BLUE)
-        self.highscore_button = HighscoreButton("Highscores", 110, 30, (680, screen_height - 75), YELLOW, D_YELLOW)
+        self.restart_button = RestartButton("Restart", 110, 30, (680, screen_height - 40), BLUE, D_BLUE)
+        self.highscore_button = HighscoreButton("Highscore", 110, 30, (680, screen_height - 80), YELLOW, D_YELLOW)
+        self.achievement_button = AchievementButton("Achievement", 110, 30, (680, screen_height - 120), GOLD, D_GOLD)
 
         self.grid_pos = []
         self.set_numpad_pos(680, 40)
@@ -42,6 +43,7 @@ class Program:
         self.draw_numpad()
         self.restart_button.draw(screen)
         self.highscore_button.draw(screen)
+        self.achievement_button.draw(screen)
 
         # Enter experimental functions here
 

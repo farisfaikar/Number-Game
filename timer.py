@@ -1,6 +1,5 @@
 import pygame
 import math
-import numbergame
 
 static_time = 0
 seconds = ""
@@ -38,9 +37,11 @@ def add_0(num):
     else:
         return f"{num}"
 
+
 def stop_timer():
     global is_timer_running
     is_timer_running = False
+
 
 def start_timer():
     global is_timer_running

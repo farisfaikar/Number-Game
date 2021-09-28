@@ -85,6 +85,7 @@ class Text:
 
     def print_highscores(self):
         self.add_line("Highscores!", YELLOW)
+        # The methods below will be replaced with a for loop
         self.add_line("#1: Faris          - Time: 01:07", WHITE)
         self.add_line("#2: -----          - Time: --:--", WHITE)
         self.add_line("#3: -----          - Time: --:--", WHITE)
