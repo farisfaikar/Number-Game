@@ -1,7 +1,9 @@
 import random
 import button
-import highscore
+import highscore as hs
+from operator import itemgetter
 
+# numbergame variables
 correct_num = []
 correct_pos = []
 combinations = []
@@ -40,8 +42,9 @@ def compare():
 
     if entered_num == secret_num:
         is_win = True
-        highscore.write_highscore()
-        highscore.read_highscore()
+        highscore = hs.load_hs()
+        highscore.append(["Faris", 124])
+        hs.save_hs(sorted(highscore, key=itemgetter(1), reverse=True))
     else:
         for letter in entered_num:
             letter_index = entered_num.find(letter)

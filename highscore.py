@@ -1,18 +1,16 @@
 import json
+from operator import itemgetter
 
 
-def write_highscore():
-    highscore_file = open('highscore.txt', 'w')
-    highscore_file.write("You won and this should store the player's name and time\n"
-                         "in a list or a dictionary")
-    highscore_file.close()
+def save_hs(highscore):
+    with open('highscore.json', 'w') as hs_file:
+        json.dump(highscore, hs_file)
 
 
-def read_highscore():
-    highscore_file = open('highscore.txt', 'r')
-    hf = highscore_file.readlines()
-    hs_list = []
-    for line in hf:
-        hs_list.append(line.strip())
-
-    print(hs_list)
+def load_hs():
+    try:
+        with open('highscore.json', 'r') as hs_file:
+            highscore = json.load(hs_file)
+    except FileNotFoundError:
+        return []
+    return sorted(highscore, key=itemgetter(1), reverse=False)

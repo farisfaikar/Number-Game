@@ -1,37 +1,49 @@
 import pygame
 import math
-import time
+
+# timer variables
+static_time = 0
+seconds = ""
+minutes = ""
+hours = ""
+is_timer_running = True
 
 
-class Timer:
-    def count_up(self):
-        ticking = True
-        seconds = 0
-        minutes = 0
-        while ticking:
-            for sec in range(seconds, 59):
-                seconds += 1
-                time.sleep(1)
-                print(f"Timer: {minutes}:{seconds}")
-            minutes += 1
-            seconds = 0
+def count_up():
+    elapsed_time = pygame.time.get_ticks()
+    dynamic_time = elapsed_time - static_time
+    seconds_ = math.floor(dynamic_time / 1000) % 60
+    minutes_ = math.floor(dynamic_time / 1000 / 60) % 60
+    hours_ = math.floor(dynamic_time / 1000 / 60 / 60)
+
+    global seconds
+    global minutes
+    global hours
+
+    if is_timer_running:
+        seconds = add_0(seconds_)
+        minutes = add_0(minutes_)
+        hours = add_0(hours_)
 
 
-class TestTimer:
-    def __init__(self):
-        self.minutes = 0
-        self.seconds = 0
-        self.ticked = False
+def reset_timer():
+    start_timer()
+    global static_time
+    static_time = pygame.time.get_ticks()
 
-    def count_up(self):
-        miliseconds = pygame.time.get_ticks()
-        seconds_elapsed = math.floor(miliseconds / 1000)
-        self.seconds = seconds_elapsed - (self.minutes * 10)
-        seconds_ = seconds_elapsed % 10
-        print(seconds_)
-        if seconds_elapsed % 10 == 0 and not self.ticked:
-            self.minutes += 1
-            self.ticked = True
 
-        # print(f"Seconds elapsed: {seconds_elapsed}")
-        # print(f"Timer: {self.minutes}:{self.seconds}")
+def add_0(num):
+    if len(str(num)) == 1:
+        return f"0{num}"
+    else:
+        return f"{num}"
+
+
+def stop_timer():
+    global is_timer_running
+    is_timer_running = False
+
+
+def start_timer():
+    global is_timer_running
+    is_timer_running = True

@@ -1,11 +1,8 @@
 import pygame
 import numbergame
 import timer
-from colorpalette import *
+from globalvar import *
 
-# Font
-chary_font = 'chary___.ttf'
-# User Input
 user_input = ""
 attempts = 0
 correct_num = []
