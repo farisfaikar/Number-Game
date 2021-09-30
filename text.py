@@ -1,11 +1,9 @@
 import pygame
 import button
 import numbergame
-from colorpalette import *
 import timer
-
-# Font
-chary_font = 'chary___.ttf'
+import highscore as hs
+from globalvar import *
 
 
 class Text:
@@ -26,6 +24,9 @@ class Text:
             self.print_clue_texts()
         elif button.text_id["highscore"]:
             self.print_highscores()
+
+        if numbergame.is_win:
+            self.input_player_name()
 
         self.reset_text_y_pos()
 
@@ -63,7 +64,8 @@ class Text:
         correct_pos = numbergame.correct_pos
         combinations = numbergame.combinations
 
-        self.add_line(f"Guess the 4 digit number combination! You have {numbergame.remaining_attempts} attempts left", WHITE)
+        self.add_line(f"Guess the 4 digit number combination! You have {numbergame.remaining_attempts} "
+                      + "attempts left", WHITE)
 
         for i in range(attempts):
             self.add_line(f"> Attempt #{i + 1}: {correct_num[i]} correct numbers, "
@@ -84,17 +86,20 @@ class Text:
             timer.stop_timer()
 
     def print_highscores(self):
+        max_highscore = 9
         self.add_line("Highscores!", YELLOW)
         # The methods below will be replaced with a for loop
-        self.add_line("#1: Faris          - Time: 01:07", WHITE)
-        self.add_line("#2: -----          - Time: --:--", WHITE)
-        self.add_line("#3: -----          - Time: --:--", WHITE)
-        self.add_line("#4: -----          - Time: --:--", WHITE)
-        self.add_line("#5: -----          - Time: --:--", WHITE)
-        self.add_line("#6: -----          - Time: --:--", WHITE)
-        self.add_line("#7: -----          - Time: --:--", WHITE)
-        self.add_line("#8: -----          - Time: --:--", WHITE)
-        self.add_line("#9: -----          - Time: --:--", WHITE)
+        highscore = hs.load_hs()
+        for index, [player_name, player_time] in enumerate(highscore):
+            self.add_line(f"#{index + 1}: {player_name}          - Time: {player_time}", WHITE)
+
+        highscore_size = len(highscore)
+        if highscore_size < max_highscore:
+            for i in range(max_highscore - highscore_size):
+                self.add_line(f"#{i + highscore_size + 1}: -----          - Time: --:--", WHITE)
+
+    def input_player_name(self):
+        self.add_line(f"Enter your name! (5 letters): {text_input}", YELLOW)
 
 
 class TextBox:
