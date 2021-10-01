@@ -1,11 +1,8 @@
 import pygame
-import button
-import numbergame
+import globalvar
 import timer
 import highscore as hs
-from globalvar import *
-
-text_input = ""
+from constantvar import *
 
 
 def normalize_text(text_):
@@ -32,13 +29,12 @@ class Text:
         self.screen = screen
         # Add text
         self.print_time()
-        game_state = numbergame.game_state
-        if game_state == 'main_game' or game_state == 'won' or game_state == 'lost':
+        globalvar.game_state = globalvar.game_state
+        if globalvar.game_state == 'main_game' or globalvar.game_state == 'won' or globalvar.game_state == 'lost':
             self.print_clue_texts()
-        elif game_state == 'highscore':
+        elif globalvar.game_state == 'highscore':
             self.print_highscores()
-
-        if game_state == 'won':
+        if globalvar.game_state == 'won':
             self.input_player_name()
 
         self.reset_text_y_pos()
@@ -62,22 +58,22 @@ class Text:
         self.textY_addable = self.textY - self.text_space
 
     def print_time(self):
-        self.add_custom_line(f"Timer: {timer.minutes}:{timer.seconds}", WHITE, 680, 5)
+        self.add_custom_line(f"Timer: {globalvar.minutes}:{globalvar.seconds}", WHITE, 680, 5)
 
     def print_error_message(self):
-        if len(button.error_message) != 0:
-            error_message = f"ERROR: {button.error_message}"
+        if len(globalvar.error_message) != 0:
+            error_message = f"ERROR: {globalvar.error_message}"
             self.add_custom_line(error_message, RED, 10, 5)
         else:
             self.add_custom_line("", RED, 10, 155)
 
     def print_clue_texts(self):
-        attempts = numbergame.attempts
-        correct_num = numbergame.correct_num
-        correct_pos = numbergame.correct_pos
-        combinations = numbergame.combinations
+        attempts = globalvar.attempts
+        correct_num = globalvar.correct_num
+        correct_pos = globalvar.correct_pos
+        combinations = globalvar.combinations
 
-        self.add_line(f"Guess the 4 digit number combination! You have {numbergame.remaining_attempts} "
+        self.add_line(f"Guess the 4 digit number combination! You have {globalvar.remaining_attempts} "
                       + "attempts left", WHITE)
 
         for i in range(attempts):
@@ -87,11 +83,11 @@ class Text:
         self.print_win_message()
 
     def print_win_message(self):
-        if numbergame.game_state == 'won':
-            self.add_line(f"You win! The correct number was {numbergame.secret_num}", GREEN)
-        if numbergame.game_state == 'lost':
-            self.add_line(f"You have run out of attempt! You lost. The correct number was {numbergame.secret_num}", RED)
-        if numbergame.game_state == 'won' or numbergame.game_state == 'lost':
+        if globalvar.game_state == 'won':
+            self.add_line(f"You win! The correct number was {globalvar.secret_num}", GREEN)
+        if globalvar.game_state == 'lost':
+            self.add_line(f"You have run out of attempt! You lost. The correct number was {globalvar.secret_num}", RED)
+        if globalvar.game_state == 'won' or globalvar.game_state == 'lost':
             self.add_line("Press the restart button to play again", BLUE)
             timer.stop_timer()
 
@@ -110,7 +106,7 @@ class Text:
                 self.add_line(f"#{i + highscore_size + 1}: -----          - Time: --:--", WHITE)
 
     def input_player_name(self):
-        self.add_line(f"Enter your name! (5 letters): {text_input}", YELLOW)
+        self.add_line(f"Enter your name! (5 letters): {globalvar.text_input}", YELLOW)
 
 
 class TextBox:
@@ -125,7 +121,7 @@ class TextBox:
         # create textbox
         rect = pygame.Rect(self.pos, (self.width, self.height))
         chary = pygame.font.Font(chary_font, 20)
-        text_surf = chary.render(button.num_input, True, self.text_color)
+        text_surf = chary.render(globalvar.num_input, True, self.text_color)
         text_rect = text_surf.get_rect(center=rect.center)
 
         # draw rect

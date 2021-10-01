@@ -1,38 +1,25 @@
 import pygame
 import math
-
-# timer variables
-static_time = 0
-seconds = ""
-minutes = ""
-hours = ""
-lapped_time = 0
-is_timer_running = True
+import globalvar
 
 
 def count_up():
     elapsed_time = pygame.time.get_ticks()
-    dynamic_time = elapsed_time - static_time
+    dynamic_time = elapsed_time - globalvar.static_time
     seconds_ = math.floor(dynamic_time / 1000) % 60
     minutes_ = math.floor(dynamic_time / 1000 / 60) % 60
     hours_ = math.floor(dynamic_time / 1000 / 60 / 60)
 
-    global seconds
-    global minutes
-    global hours
-    global lapped_time
-
-    if is_timer_running:
-        seconds = add_0(seconds_)
-        minutes = add_0(minutes_)
-        hours = add_0(hours_)
-        lapped_time = dynamic_time
+    if globalvar.is_timer_running:
+        globalvar.seconds = add_0(seconds_)
+        globalvar.minutes = add_0(minutes_)
+        globalvar.hours = add_0(hours_)
+        globalvar.lapped_time = dynamic_time
 
 
 def reset_timer():
     start_timer()
-    global static_time
-    static_time = pygame.time.get_ticks()
+    globalvar.static_time = pygame.time.get_ticks()
 
 
 def add_0(num):
@@ -43,13 +30,11 @@ def add_0(num):
 
 
 def stop_timer():
-    global is_timer_running
-    is_timer_running = False
+    globalvar.is_timer_running = False
 
 
 def start_timer():
-    global is_timer_running
-    is_timer_running = True
+    globalvar.is_timer_running = True
 
 
 def reformat_time(time):

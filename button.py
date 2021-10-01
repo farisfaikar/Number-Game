@@ -1,14 +1,8 @@
 import pygame
 import numbergame
 import timer
-from globalvar import *
-
-num_input = ""
-attempts = 0
-correct_num = []
-correct_pos = []
-combinations = []
-error_message = ""
+from constantvar import *
+import globalvar
 
 
 class Button:
@@ -72,57 +66,50 @@ class Button:
             self.top_color = self.TOP_COLOR
 
     def button_action(self):
-        global num_input
-        global error_message
-        user_input_length = len(num_input)
+        user_input_length = len(globalvar.num_input)
         if user_input_length < 4:
-            if num_input.find(self.text) == -1:
-                num_input += self.text
-                error_message = ""
+            if globalvar.num_input.find(self.text) == -1:
+                globalvar.num_input += self.text
+                globalvar.error_message = ""
             else:
-                error_message = "You can only input different numbers"
+                globalvar.error_message = "You can only input different numbers"
         else:
-            error_message = "You can only input up to 4 digits"
+            globalvar.error_message = "You can only input up to 4 digits"
 
 
 class ConfirmButton(Button):
     def button_action(self):
-        global num_input
-        global error_message
-
-        if len(num_input) == 4:
-            if numbergame.game_state == 'main_game':
+        if len(globalvar.num_input) == 4:
+            if globalvar.game_state == 'main_game':
                 numbergame.compare()
-            num_input = ""
-            error_message = ""
+            globalvar.num_input = ""
+            globalvar.error_message = ""
         else:
-            error_message = "You need to input 4 numbers"
+            globalvar.error_message = "You need to input 4 numbers"
 
 
 class ResetButton(Button):
     def button_action(self):
-        global num_input
-        num_input = ""
+        globalvar.num_input = ""
 
 
 class RestartButton(Button):
     def button_action(self):
         numbergame.restart()
         timer.reset_timer()
-        numbergame.game_state = 'main_game'
+        globalvar.game_state = 'main_game'
 
         # error_message shall be eradicated
-        global error_message
-        error_message = ""
+        globalvar.error_message = ""
 
 
 class HighscoreButton(Button):
     def button_action(self):
         timer.stop_timer()
-        numbergame.game_state = 'highscore'
+        globalvar.game_state = 'highscore'
 
 
 class AchievementButton(Button):
     def button_action(self):
         print("Display Achievements")
-        numbergame.game_state = 'achievement'
+        globalvar.game_state = 'achievement'

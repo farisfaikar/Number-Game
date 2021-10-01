@@ -1,77 +1,53 @@
 import random
-import button
 import text
-
-# numbergame variables
-correct_num = []
-correct_pos = []
-combinations = []
-attempts = 0
-MAX_ATTEMPTS = 8
-remaining_attempts = MAX_ATTEMPTS
-secret_num = ""
-game_state = 'main_game'  # game_state types: 'main_game', 'lost', 'won', 'highscore', 'achievement'
+import globalvar
 
 
 def gen_secret_num():
-    global secret_num
-
-    while len(secret_num) != 4:
+    while len(globalvar.secret_num) != 4:
         r_num = str(random.randint(0, 9))
-        if r_num in secret_num:
+        if r_num in globalvar.secret_num:
             continue
         else:
-            secret_num = secret_num + r_num
+            globalvar.secret_num = globalvar.secret_num + r_num
 
 
 def compare():
     gen_secret_num()
+    print(globalvar.secret_num)  # debug: print out secret number
 
-    global secret_num
-    global attempts
-    global remaining_attempts
-    global game_state
-    # print(secret_num)  # debug: print out secret number
+    _entered_num = globalvar.num_input
+    _correct_num = 0
+    _correct_pos = 0
 
-    entered_num = button.num_input
-    correct_num_ = 0
-    correct_pos_ = 0
-
-    if entered_num == secret_num:
-        game_state = 'won'
+    if _entered_num == globalvar.secret_num:
+        globalvar.game_state = 'won'
     else:
-        for letter in entered_num:
-            letter_index = entered_num.find(letter)
-            if letter == secret_num[letter_index]:
-                correct_num_ += 1
-                correct_pos_ += 1
-            elif entered_num[letter_index] in secret_num:
-                correct_num_ += 1
-        attempts += 1
-        remaining_attempts = MAX_ATTEMPTS - attempts
-        if attempts >= MAX_ATTEMPTS:
-            game_state = 'lost'
+        for letter in _entered_num:
+            letter_index = _entered_num.find(letter)
+            if letter == globalvar.secret_num[letter_index]:
+                _correct_num += 1
+                _correct_pos += 1
+            elif _entered_num[letter_index] in globalvar.secret_num:
+                _correct_num += 1
+        globalvar.attempts += 1
+        globalvar.remaining_attempts = globalvar.MAX_ATTEMPTS - globalvar.attempts
+        if globalvar.attempts >= globalvar.MAX_ATTEMPTS:
+            globalvar.game_state = 'lost'
 
-        combinations.append(entered_num)
-        correct_num.append(correct_num_)
-        correct_pos.append(correct_pos_)
+        globalvar.combinations.append(_entered_num)
+        globalvar.correct_num.append(_correct_num)
+        globalvar.correct_pos.append(_correct_pos)
 
 
 def restart():
-    global correct_num
-    global correct_pos
-    global combinations
-    global attempts
-    global remaining_attempts
-    global secret_num
-    global game_state
+    globalvar.correct_num = []
+    globalvar.correct_pos = []
+    globalvar.combinations = []
+    globalvar.attempts = 0
+    globalvar.game_state = 'main_game'
+    globalvar.remaining_attempts = globalvar.MAX_ATTEMPTS
+    globalvar.secret_num = ''
 
-    correct_num = []
-    correct_pos = []
-    combinations = []
-    attempts = 0
-    game_state = 'main_game'
-    remaining_attempts = MAX_ATTEMPTS
-    secret_num = ''
     gen_secret_num()
     text.text_input = ""
