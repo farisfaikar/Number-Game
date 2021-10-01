@@ -5,8 +5,8 @@ from text import Text, TextBox
 from button import Button, ConfirmButton, ResetButton, RestartButton, HighscoreButton, AchievementButton
 import timer
 import highscore as hs
+import globalvar as gv
 from constantvar import *
-import globalvar
 
 
 class Program:
@@ -118,15 +118,15 @@ def main():
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.KEYDOWN:
-                if globalvar.game_state == 'won':
+                if gv.game_state == 'won':
                     if event.key == pygame.K_RETURN:
-                        globalvar.game_state = 'highscore'
+                        gv.game_state = 'highscore'
                         hs.save_score()
                     if event.key == pygame.K_BACKSPACE:
-                        globalvar.text_input = globalvar.text_input[:-1]
+                        gv.text_input = gv.text_input[:-1]
                     else:
-                        if len(globalvar.text_input) < 5:
-                            globalvar.text_input += event.unicode
+                        if len(gv.text_input) < 5:
+                            gv.text_input += event.unicode
 
         # Game code
         program.run()

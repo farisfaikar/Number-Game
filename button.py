@@ -1,8 +1,8 @@
 import pygame
 import numbergame
 import timer
+import globalvar as gv
 from constantvar import *
-import globalvar
 
 
 class Button:
@@ -66,50 +66,50 @@ class Button:
             self.top_color = self.TOP_COLOR
 
     def button_action(self):
-        user_input_length = len(globalvar.num_input)
+        user_input_length = len(gv.num_input)
         if user_input_length < 4:
-            if globalvar.num_input.find(self.text) == -1:
-                globalvar.num_input += self.text
-                globalvar.error_message = ""
+            if gv.num_input.find(self.text) == -1:
+                gv.num_input += self.text
+                gv.error_message = ""
             else:
-                globalvar.error_message = "You can only input different numbers"
+                gv.error_message = "You can only input different numbers"
         else:
-            globalvar.error_message = "You can only input up to 4 digits"
+            gv.error_message = "You can only input up to 4 digits"
 
 
 class ConfirmButton(Button):
     def button_action(self):
-        if len(globalvar.num_input) == 4:
-            if globalvar.game_state == 'main_game':
+        if len(gv.num_input) == 4:
+            if gv.game_state == 'main_game':
                 numbergame.compare()
-            globalvar.num_input = ""
-            globalvar.error_message = ""
+            gv.num_input = ""
+            gv.error_message = ""
         else:
-            globalvar.error_message = "You need to input 4 numbers"
+            gv.error_message = "You need to input 4 numbers"
 
 
 class ResetButton(Button):
     def button_action(self):
-        globalvar.num_input = ""
+        gv.num_input = ""
 
 
 class RestartButton(Button):
     def button_action(self):
         numbergame.restart()
         timer.reset_timer()
-        globalvar.game_state = 'main_game'
+        gv.game_state = 'main_game'
 
         # error_message shall be eradicated
-        globalvar.error_message = ""
+        gv.error_message = ""
 
 
 class HighscoreButton(Button):
     def button_action(self):
         timer.stop_timer()
-        globalvar.game_state = 'highscore'
+        gv.game_state = 'highscore'
 
 
 class AchievementButton(Button):
     def button_action(self):
         print("Display Achievements")
-        globalvar.game_state = 'achievement'
+        gv.game_state = 'achievement'
