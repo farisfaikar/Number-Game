@@ -3,13 +3,12 @@ import numbergame
 import timer
 from globalvar import *
 
-user_input = ""
+num_input = ""
 attempts = 0
 correct_num = []
 correct_pos = []
 combinations = []
 error_message = ""
-text_id = {"clue_text": True, "highscore": False}
 
 
 class Button:
@@ -73,12 +72,12 @@ class Button:
             self.top_color = self.TOP_COLOR
 
     def button_action(self):
-        global user_input
+        global num_input
         global error_message
-        user_input_length = len(user_input)
+        user_input_length = len(num_input)
         if user_input_length < 4:
-            if user_input.find(self.text) == -1:
-                user_input += self.text
+            if num_input.find(self.text) == -1:
+                num_input += self.text
                 error_message = ""
             else:
                 error_message = "You can only input different numbers"
@@ -88,13 +87,13 @@ class Button:
 
 class ConfirmButton(Button):
     def button_action(self):
-        global user_input
+        global num_input
         global error_message
 
-        if len(user_input) == 4:
-            if not numbergame.is_win and not numbergame.is_lost:
+        if len(num_input) == 4:
+            if numbergame.game_state == 'main_game':
                 numbergame.compare()
-            user_input = ""
+            num_input = ""
             error_message = ""
         else:
             error_message = "You need to input 4 numbers"
@@ -102,29 +101,28 @@ class ConfirmButton(Button):
 
 class ResetButton(Button):
     def button_action(self):
-        global user_input
-        user_input = ""
+        global num_input
+        num_input = ""
 
 
 class RestartButton(Button):
     def button_action(self):
         numbergame.restart()
         timer.reset_timer()
+        numbergame.game_state = 'main_game'
+
+        # error_message shall be eradicated
         global error_message
-        global text_id
         error_message = ""
-        text_id["clue_text"] = True
-        text_id["highscore"] = False
 
 
 class HighscoreButton(Button):
     def button_action(self):
         timer.stop_timer()
-        global text_id
-        text_id["highscore"] = True
-        text_id["clue_text"] = False
+        numbergame.game_state = 'highscore'
 
 
 class AchievementButton(Button):
     def button_action(self):
         print("Display Achievements")
+        numbergame.game_state = 'achievement'

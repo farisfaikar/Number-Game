@@ -19,9 +19,4 @@ GOLD = (255, 215, 0)
 D_GOLD = (200, 150, 0)
 # Font
 chary_font = 'chary___.ttf'
-
-# User Input
-
-
-# main variables
-text_input = ""
+# Global Variables

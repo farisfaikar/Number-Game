@@ -1,5 +1,7 @@
 import pygame
 import sys
+
+import numbergame
 import text
 from text import Text, TextBox
 from button import Button, ConfirmButton, ResetButton, RestartButton, HighscoreButton, AchievementButton
@@ -7,6 +9,7 @@ import timer
 import highscore as hs
 from operator import itemgetter
 from globalvar import *
+import globalvar
 
 
 class Program:
@@ -37,9 +40,6 @@ class Program:
         self.confirm_button = ConfirmButton("C", 30, 30, (self.grid_pos[2][4]), GREEN, D_GREEN)
 
         # Enter experimental instances here
-        highscore = hs.load_hs()
-        # highscore.append(["John Doe", 66])
-        hs.save_hs(sorted(highscore, key=itemgetter(1), reverse=False))
 
     def run(self):  # This bad boy runs every frame -------------------------------
         # Enter functions here
@@ -119,14 +119,15 @@ if __name__ == '__main__':
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN:
-                    print("yea, this is supposed to enter the name, but for now it's kinda there")
-                if event.key == pygame.K_BACKSPACE:
-                    text.text_input = text.text_input[:-1]
-                else:
-                    if len(text.text_input) < 5:
-                        print(event.unicode)  # this shouldn't print outside the input window
-                        text.text_input += event.unicode
+                if numbergame.game_state == 'won':
+                    if event.key == pygame.K_RETURN:
+                        numbergame.game_state = 'highscore'
+                        hs.save_score()
+                    if event.key == pygame.K_BACKSPACE:
+                        text.text_input = text.text_input[:-1]
+                    else:
+                        if len(text.text_input) < 5:
+                            text.text_input += event.unicode
 
         # Game code
         program.run()

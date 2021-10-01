@@ -1,7 +1,6 @@
 import random
 import button
-import highscore as hs
-from operator import itemgetter
+import text
 
 # numbergame variables
 correct_num = []
@@ -10,9 +9,8 @@ combinations = []
 attempts = 0
 MAX_ATTEMPTS = 8
 remaining_attempts = MAX_ATTEMPTS
-is_win = False
-is_lost = False
 secret_num = ""
+game_state = 'main_game'  # game_state types: 'main_game', 'lost', 'won', 'highscore', 'achievement'
 
 
 def gen_secret_num():
@@ -32,19 +30,15 @@ def compare():
     global secret_num
     global attempts
     global remaining_attempts
-    global is_win
-    global is_lost
-    print(secret_num)  # debug print out secret number
+    global game_state
+    # print(secret_num)  # debug: print out secret number
 
-    entered_num = button.user_input
+    entered_num = button.num_input
     correct_num_ = 0
     correct_pos_ = 0
 
     if entered_num == secret_num:
-        is_win = True
-        highscore = hs.load_hs()
-        highscore.append(["Faris", 124])
-        hs.save_hs(sorted(highscore, key=itemgetter(1), reverse=True))
+        game_state = 'won'
     else:
         for letter in entered_num:
             letter_index = entered_num.find(letter)
@@ -56,7 +50,7 @@ def compare():
         attempts += 1
         remaining_attempts = MAX_ATTEMPTS - attempts
         if attempts >= MAX_ATTEMPTS:
-            is_lost = True
+            game_state = 'lost'
 
         combinations.append(entered_num)
         correct_num.append(correct_num_)
@@ -68,17 +62,16 @@ def restart():
     global correct_pos
     global combinations
     global attempts
-    global is_win
-    global is_lost
     global remaining_attempts
     global secret_num
+    global game_state
 
     correct_num = []
     correct_pos = []
     combinations = []
     attempts = 0
-    is_win = False
-    is_lost = False
+    game_state = 'main_game'
     remaining_attempts = MAX_ATTEMPTS
     secret_num = ''
     gen_secret_num()
+    text.text_input = ""

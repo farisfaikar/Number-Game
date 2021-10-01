@@ -5,6 +5,19 @@ import timer
 import highscore as hs
 from globalvar import *
 
+text_input = ""
+
+
+def normalize_text(text_):
+    max_text_length = 5
+    text_length = len(text_)
+    if text_length < 5:
+        for i in range(max_text_length - text_length):
+            text_ += " "
+        return text_
+    else:
+        return text_
+
 
 class Text:
     def __init__(self):
@@ -19,13 +32,13 @@ class Text:
         self.screen = screen
         # Add text
         self.print_time()
-
-        if button.text_id["clue_text"]:
+        game_state = numbergame.game_state
+        if game_state == 'main_game' or game_state == 'won' or game_state == 'lost':
             self.print_clue_texts()
-        elif button.text_id["highscore"]:
+        elif game_state == 'highscore':
             self.print_highscores()
 
-        if numbergame.is_win:
+        if game_state == 'won':
             self.input_player_name()
 
         self.reset_text_y_pos()
@@ -74,14 +87,11 @@ class Text:
         self.print_win_message()
 
     def print_win_message(self):
-        is_win = numbergame.is_win
-        is_lost = numbergame.is_lost
-
-        if is_win:
+        if numbergame.game_state == 'won':
             self.add_line(f"You win! The correct number was {numbergame.secret_num}", GREEN)
-        if is_lost:
+        if numbergame.game_state == 'lost':
             self.add_line(f"You have run out of attempt! You lost. The correct number was {numbergame.secret_num}", RED)
-        if is_win or is_lost:
+        if numbergame.game_state == 'won' or numbergame.game_state == 'lost':
             self.add_line("Press the restart button to play again", BLUE)
             timer.stop_timer()
 
@@ -91,7 +101,8 @@ class Text:
         # The methods below will be replaced with a for loop
         highscore = hs.load_hs()
         for index, [player_name, player_time] in enumerate(highscore):
-            self.add_line(f"#{index + 1}: {player_name}          - Time: {player_time}", WHITE)
+            form_player_time = timer.reformat_time(player_time)
+            self.add_line(f"#{index + 1}: {player_name}          - Time: {form_player_time}", WHITE)
 
         highscore_size = len(highscore)
         if highscore_size < max_highscore:
@@ -114,7 +125,7 @@ class TextBox:
         # create textbox
         rect = pygame.Rect(self.pos, (self.width, self.height))
         chary = pygame.font.Font(chary_font, 20)
-        text_surf = chary.render(button.user_input, True, self.text_color)
+        text_surf = chary.render(button.num_input, True, self.text_color)
         text_rect = text_surf.get_rect(center=rect.center)
 
         # draw rect
