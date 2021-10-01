@@ -1,3 +1,4 @@
+# ----------- Constant Variables -----------
 # Color palette (RGB)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -17,5 +18,6 @@ D_YELLOW = (200, 200, 100)
 PURPLE = (255, 0, 255)
 GOLD = (255, 215, 0)
 D_GOLD = (200, 150, 0)
+
 # Font
 chary_font = 'chary___.ttf'
