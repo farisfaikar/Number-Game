@@ -92,12 +92,14 @@ class Program:
 
 
 # Executables -------------------------------------------------------------
-if __name__ == '__main__':
+screen_width = 800
+screen_height = 400
+screen = pygame.display.set_mode((screen_width, screen_height))
+
+
+def main():
     # Initialize pygame
     pygame.init()
-    screen_width = 800
-    screen_height = 400
-    screen = pygame.display.set_mode((screen_width, screen_height))
     clock = pygame.time.Clock()
     icon = pygame.image.load('assets/sprites/number_game.png')
 
@@ -135,3 +137,7 @@ if __name__ == '__main__':
 
         # Time & Clock
         clock.tick(60)
+
+
+if __name__ == '__main__':
+    main()
