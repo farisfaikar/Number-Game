@@ -7,9 +7,7 @@ from text import Text, TextBox
 from button import Button, ConfirmButton, ResetButton, RestartButton, HighscoreButton, AchievementButton
 import timer
 import highscore as hs
-from operator import itemgetter
 from globalvar import *
-import globalvar
 
 
 class Program:
