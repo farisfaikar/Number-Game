@@ -14,7 +14,7 @@ def gen_secret_num():
 
 def compare():
     gen_secret_num()
-    print(gv.secret_num)  # debug: print out secret number
+    print(f"DEBUG: secret num = {gv.secret_num}")  # debug: print out secret number
 
     _entered_num = gv.num_input
     _correct_num = 0
