@@ -1,5 +1,4 @@
 import random
-import text
 import globalvar as gv
 
 
@@ -48,6 +47,6 @@ def restart():
     gv.game_state = 'main_game'
     gv.remaining_attempts = gv.MAX_ATTEMPTS
     gv.secret_num = ''
+    gv.text_input = ""
 
     gen_secret_num()
-    text.text_input = ""

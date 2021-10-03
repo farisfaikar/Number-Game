@@ -5,10 +5,10 @@ import globalvar as gv
 
 
 def normalize_text(text_):
-    max_text_length = 10
+    gv.max_text_length = 10
     text_length = len(text_)
-    if text_length < 5:
-        for i in range(max_text_length - text_length):
+    if text_length < gv.max_text_length:
+        for i in range(gv.max_text_length - text_length):
             text_ += " "
         return text_
     else:
@@ -28,6 +28,7 @@ class Text:
         self.screen = screen
         # Add text
         self.print_time()
+
         gv.game_state = gv.game_state
         if gv.game_state == 'main_game' or gv.game_state == 'won' or gv.game_state == 'lost':
             self.print_clue_texts()
@@ -59,13 +60,6 @@ class Text:
     def print_time(self):
         self.add_custom_line(f"Timer: {gv.minutes}:{gv.seconds}", gv.WHITE, 680, 5)
 
-    def print_error_message(self):
-        if len(gv.error_message) != 0:
-            error_message = f"ERROR: {gv.error_message}"
-            self.add_custom_line(error_message, gv.RED, 10, 5)
-        else:
-            self.add_custom_line("", gv.RED, 10, 155)
-
     def print_clue_texts(self):
         attempts = gv.attempts
         correct_num = gv.correct_num
@@ -96,7 +90,8 @@ class Text:
         highscore = hs.load_hs()
         for index, [player_name, player_time] in enumerate(highscore):
             form_player_time = timer.reformat_time(player_time)
-            self.add_line(f"#{index + 1}: {player_name}          - Time: {form_player_time}", gv.WHITE)
+            if index < max_highscore:
+                self.add_line(f"#{index + 1}: {player_name}   - Time: {form_player_time}", gv.WHITE)
 
         highscore_size = len(highscore)
         if highscore_size < max_highscore:

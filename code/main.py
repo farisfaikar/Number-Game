@@ -145,7 +145,7 @@ def main():
                     if event.key == pygame.K_BACKSPACE:
                         gv.text_input = gv.text_input[:-1]
                     else:
-                        if len(gv.text_input) < 5:
+                        if len(gv.text_input) < 10:
                             gv.text_input += event.unicode
 
         # Game code

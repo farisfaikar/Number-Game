@@ -69,11 +69,6 @@ class Button:
         if user_input_length < 4:
             if gv.num_input.find(self.text) == -1:
                 gv.num_input += self.text
-                gv.error_message = ""
-            else:
-                gv.error_message = "You can only input different numbers"
-        else:
-            gv.error_message = "You can only input up to 4 digits"
 
 
 class ConfirmButton(Button):
@@ -82,9 +77,6 @@ class ConfirmButton(Button):
             if gv.game_state == 'main_game':
                 numbergame.compare()
             gv.num_input = ""
-            gv.error_message = ""
-        else:
-            gv.error_message = "You need to input 4 numbers"
 
 
 class ResetButton(Button):
@@ -97,9 +89,6 @@ class RestartButton(Button):
         numbergame.restart()
         timer.reset_timer()
         gv.game_state = 'main_game'
-
-        # error_message shall be eradicated
-        gv.error_message = ""
 
 
 class HighscoreButton(Button):

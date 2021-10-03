@@ -36,3 +36,4 @@ is_timer_running = True
 
 # text variables
 text_input = ""
+max_text_length = 10
