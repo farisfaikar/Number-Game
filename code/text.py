@@ -121,3 +121,72 @@ class TextBox:
         pygame.draw.rect(screen, self.box_color, rect)
         # draw text
         screen.blit(text_surf, text_rect)
+
+# ---------- Weird and untested stuffs down here ---------- #
+
+
+class TextCreator:
+    def __init__(self):
+        self.timer_text = TimerText(680, 5)
+        self.clue_text = ClueText(10, 5)
+        self.test_text = NewText(100, 100)
+        # self.num_text_box = TextBox()  # we may have a problem with this one, cause it's part of NumPad
+
+        # timer
+        self.timer_text.add_text(f"Timer: {gv.minutes}:{gv.seconds}", gv.WHITE)
+        # clue text
+        self.clue_text.add_text(f"Guess the 4 digit number combination! You have {gv.remaining_attempts} "
+                                f"attempts left", gv.CREAM)
+
+    def update_text(self):
+        self.timer_text.update_text()
+        self.clue_text.update_text()
+
+    def draw_text(self, screen):
+        self.timer_text.draw(screen)
+        self.clue_text.draw(screen)
+
+
+class NewText:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.y_space = 20
+        self.text_data = []  # [text, color]
+        # font
+        self.chary = pygame.font.Font(gv.chary_font, 20)
+
+    def add_text(self, text, color):
+        self.text_data.append([text, color])
+
+    def draw(self, screen):
+        for i, (text, color) in enumerate(self.text_data):
+            text_obj = self.chary.render(text, True, color)
+            screen.blit(text_obj, (self.x, i * self.y_space + self.y))
+
+
+class ClueText(NewText):
+    def update_text(self):
+        if gv.is_compared:
+            i = gv.attempts - 1
+            self.text_data.append([f"> Attempt #{gv.attempts}: {gv.correct_num[i]} correct numbers, "
+                                   f"{gv.correct_pos[i]} are in the correct position. [{gv.combinations[i]}]", gv.BLUE])
+            self.add_win_message()
+            gv.is_compared = False
+
+        if gv.is_restarted:
+            self.text_data = []
+
+    def add_win_message(self):
+        if gv.game_state == 'won':
+            self.add_text(f"You win! The correct number was {gv.secret_num}", gv.LIME)
+        if gv.game_state == 'lost':
+            self.add_text(f"You have run out of attempt! You lost. The correct number was {gv.secret_num}", gv.ORANGE)
+        if gv.game_state == 'won' or gv.game_state == 'lost':
+            self.add_text("Press the restart button to play again", gv.RED)
+            timer.stop_timer()
+
+
+class TimerText(NewText):
+    def update_text(self):
+        self.text_data[0][0] = f"Timer: {gv.minutes}:{gv.seconds}"

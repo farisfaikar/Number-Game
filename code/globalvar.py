@@ -21,6 +21,8 @@ MAX_ATTEMPTS = 8
 remaining_attempts = MAX_ATTEMPTS
 secret_num = ""
 game_state = 'main_game'  # game_state types: 'main_game', 'lost', 'won', 'highscore', 'achievement'
+is_compared = False
+is_restarted = False
 
 # button variables
 num_input = ""

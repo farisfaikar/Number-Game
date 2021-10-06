@@ -5,7 +5,7 @@ import globalvar as gv
 
 
 class Button:
-    def __init__(self, text, width, height, pos, top_color):
+    def __init__(self, text, width, height, pos, color):
         # Core attributes
         self.pressed = False
         self.elevation = 4
@@ -16,8 +16,8 @@ class Button:
 
         # top rectangle
         self.top_rect = pygame.Rect(pos, (width, height))
-        self.TOP_COLOR = top_color
-        self.top_color = top_color
+        self.TOP_COLOR = color
+        self.top_color = color
 
         # bottom rectangle
         self.bottom_rect = pygame.Rect(pos, (width, height))
