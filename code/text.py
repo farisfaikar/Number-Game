@@ -15,23 +15,34 @@ def normalize_text(text_):
         return text_
 
 
+class TextManager:
+    def __init__(self, screen):
+        # Initiate instances
+        self.clue_text = ClueText(screen)
+        # self.timer_text = TimerText()
+        # self.highscore_text = HighscoreText()
+
+    def draw(self):
+        self.clue_text.draw()
+
+
 class Text:
-    def __init__(self):
-        self.screen = None
+    def __init__(self, screen):
+        self.screen = screen
         self.text_space = 20
         self.textX = 10  # initial x position
         self.textY = 5  # initial y position
         self.textY_addable = 0
         self.reset_text_y_pos()
 
-    def draw_text(self, screen):
+    def draw(self, screen):
         self.screen = screen
         # Add text
         self.print_time()
 
         gv.game_state = gv.game_state
         if gv.game_state == 'main_game' or gv.game_state == 'won' or gv.game_state == 'lost':
-            self.print_clue_texts()
+            self.clue_text.print_clue_texts()
         elif gv.game_state == 'highscore':
             self.print_highscores()
         if gv.game_state == 'won':
@@ -60,30 +71,6 @@ class Text:
     def print_time(self):
         self.add_custom_line(f"Timer: {gv.minutes}:{gv.seconds}", gv.WHITE, 680, 5)
 
-    def print_clue_texts(self):
-        attempts = gv.attempts
-        correct_num = gv.correct_num
-        correct_pos = gv.correct_pos
-        combinations = gv.combinations
-
-        self.add_line(f"Guess the 4 digit number combination! You have {gv.remaining_attempts} "
-                      + "attempts left", gv.CREAM)
-
-        for i in range(attempts):
-            self.add_line(f"> Attempt #{i + 1}: {correct_num[i]} correct numbers, "
-                          f"{correct_pos[i]} are in the correct position. [{combinations[i]}]", gv.BLUE)
-
-        self.print_win_message()
-
-    def print_win_message(self):
-        if gv.game_state == 'won':
-            self.add_line(f"You win! The correct number was {gv.secret_num}", gv.LIME)
-        if gv.game_state == 'lost':
-            self.add_line(f"You have run out of attempt! You lost. The correct number was {gv.secret_num}", gv.ORANGE)
-        if gv.game_state == 'won' or gv.game_state == 'lost':
-            self.add_line("Press the restart button to play again", gv.RED)
-            timer.stop_timer()
-
     def print_highscores(self):
         max_highscore = 9
         self.add_line("Highscores!", gv.CREAM)
@@ -98,9 +85,8 @@ class Text:
             for i in range(max_highscore - highscore_size):
                 self.add_line(f"#{i + highscore_size + 1}: ----------   - Time: --:--", gv.WHITE)
 
-    def input_player_name(self):
-        self.add_line(f"Enter your name! (5 letters): {gv.text_input}", gv.ORANGE)
-
+    def set_screen(self, screen):
+        self.screen = screen
 
 class TextBox:
     def __init__(self, width, height, pos, box_color, text_color):
@@ -122,14 +108,57 @@ class TextBox:
         # draw text
         screen.blit(text_surf, text_rect)
 
+
+class ClueText(Text):
+    def draw(self):
+        if gv.game_state == 'main_game' or gv.game_state == 'won' or gv.game_state == 'lost':
+            self.print_clue_texts()
+        elif gv.game_state == 'won':
+            self.input_player_name()
+
+    def print_clue_texts(self):
+        attempts = gv.attempts
+        correct_num = gv.correct_num
+        correct_pos = gv.correct_pos
+        combinations = gv.combinations
+
+        self.add_line(f"Guess the 4 digit number combination! You have {gv.remaining_attempts} "
+                      + "attempts left", gv.CREAM)
+
+        for i in range(attempts):
+            self.add_line(f"> Attempt #{i + 1}: {correct_num[i]} correct numbers, "
+                          f"{correct_pos[i]} are in the correct position. [{combinations[i]}]", gv.BLUE)
+
+        self.check_win_condition()
+
+    def check_win_condition(self):
+        if gv.game_state == 'won':
+            self.add_line(f"You win! The correct number was {gv.secret_num}", gv.LIME)
+        if gv.game_state == 'lost':
+            self.add_line(f"You have run out of attempt! You lost. The correct number was {gv.secret_num}", gv.ORANGE)
+        if gv.game_state == 'won' or gv.game_state == 'lost':
+            self.add_line("Press the restart button to play again", gv.RED)
+            timer.stop_timer()
+
+    def input_player_name(self):
+        self.add_line(f"Enter your name! (5 letters): {gv.text_input}", gv.ORANGE)
+
+
+class TimerText(Text):
+    pass
+
+
+class HighscoreText(Text):
+    pass
+
 # ---------- Weird and untested stuffs down here ---------- #
 
-
-class TextCreator:
+"""
+class TextCreator:  # Text creator, this is the place to adjust and and text
     def __init__(self):
         self.timer_text = TimerText(680, 5)
         self.clue_text = ClueText(10, 5)
-        self.test_text = NewText(100, 100)
+        self.highscore_text = HighscoreText(10, 5)
         # self.num_text_box = TextBox()  # we may have a problem with this one, cause it's part of NumPad
 
         # timer
@@ -138,16 +167,20 @@ class TextCreator:
         self.clue_text.add_text(f"Guess the 4 digit number combination! You have {gv.remaining_attempts} "
                                 f"attempts left", gv.CREAM)
 
-    def update_text(self):
+    def update_text(self):  # Runs every frame
         self.timer_text.update_text()
         self.clue_text.update_text()
+        self.highscore_text.update_text()
 
-    def draw_text(self, screen):
+    def draw_text(self, screen):  # Runs every frame
         self.timer_text.draw(screen)
-        self.clue_text.draw(screen)
+        if gv.game_state == 'main_game' or gv.game_state == 'won' or gv.game_state == 'lost':
+            self.clue_text.draw(screen)
+        elif gv.game_state == 'highscore':
+            self.highscore_text.draw(screen)
 
 
-class NewText:
+class NewText:  # Parent class for Text. Will rename it to Text when stable
     def __init__(self, x, y):
         self.x = x
         self.y = y
@@ -166,18 +199,17 @@ class NewText:
 
 
 class ClueText(NewText):
-    def update_text(self):
+    def update_text(self):  # this code doesn't look right. Also it runs every frame... so
         if gv.is_compared:
-            i = gv.attempts - 1
-            self.text_data.append([f"> Attempt #{gv.attempts}: {gv.correct_num[i]} correct numbers, "
-                                   f"{gv.correct_pos[i]} are in the correct position. [{gv.combinations[i]}]", gv.BLUE])
-            self.add_win_message()
+            self.add_clue()
+            self.check_win_condition()
+            self.input_player_name()
             gv.is_compared = False
 
         if gv.is_restarted:
-            self.text_data = []
+            self.remove_clues()
 
-    def add_win_message(self):
+    def check_win_condition(self):
         if gv.game_state == 'won':
             self.add_text(f"You win! The correct number was {gv.secret_num}", gv.LIME)
         if gv.game_state == 'lost':
@@ -185,8 +217,41 @@ class ClueText(NewText):
         if gv.game_state == 'won' or gv.game_state == 'lost':
             self.add_text("Press the restart button to play again", gv.RED)
             timer.stop_timer()
+    
+    def add_clue(self):
+        i = gv.attempts - 1
+        self.text_data.append([f"> Attempt #{gv.attempts}: {gv.correct_num[i]} correct numbers, "
+                                   f"{gv.correct_pos[i]} are in the correct position. [{gv.combinations[i]}]", gv.BLUE])
+
+    def remove_clues(self):
+        if len(self.text_data) > 1:
+            del self.text_data[-1]
+        else:
+            gv.is_restarted = False
+
+    def input_player_name(self):
+        self.add_text(f"Enter your name! (5 letters): {gv.text_input}", gv.ORANGE)
+
+
+class HighscoreText(NewText):
+    def update_text(self):
+        max_highscore = 9
+        if len(self.text_data) < 1:
+            self.add_text("Highscores!", gv.CREAM)
+        elif len(self.text_data) < max_highscore:
+            highscore = hs.load_hs()
+            for index, [player_name, player_time] in enumerate(highscore):
+                formatted_player_time = timer.reformat_time(player_time)
+                if index < max_highscore:
+                    self.add_text(f"#{index + 1}: {player_name}   - Time: {formatted_player_time}", gv.WHITE)
+
+            highscore_size = len(highscore)
+            if highscore_size < max_highscore:
+                for i in range(max_highscore - highscore_size):
+                    self.add_text(f"#{i + highscore_size + 1}: ----------   - Time: --:--", gv.WHITE)
 
 
 class TimerText(NewText):
     def update_text(self):
         self.text_data[0][0] = f"Timer: {gv.minutes}:{gv.seconds}"
+"""

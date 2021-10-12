@@ -2,7 +2,7 @@ import pygame
 import sys
 
 from random import randint
-from text import Text, TextBox, NewText, ClueText
+from text import Text, TextBox, TextManager
 from button import Button, ConfirmButton, ResetButton, RestartButton, HighscoreButton, AchievementButton
 import text
 import numbergame
@@ -15,7 +15,6 @@ class Program:
     def __init__(self):
         # Enter instances here -----------------------------------------------------
         numbergame.gen_secret_num()
-        self.text = Text()
 
         self.restart_button = RestartButton("Restart", 110, 30, (680, screen_height - 40), gv.RED)
         self.highscore_button = HighscoreButton("Highscore", 110, 30, (680, screen_height - 80), gv.BLUE)
@@ -40,7 +39,8 @@ class Program:
         self.confirm_button = ConfirmButton("=", 30, 30, (self.grid_pos[2][4]), gv.LIME)
 
         # Enter experimental instances here
-        self.text_creator = text.TextCreator()
+        # self.text_creator = text.TextCreator()
+        self.text_manager = TextManager(screen)
 
     def run(self):  # This bad boy runs every frame -------------------------------
         # Enter functions here
@@ -54,8 +54,9 @@ class Program:
         self.achievement_button.draw(screen)
 
         # Enter experimental functions here
-        self.text_creator.update_text()
-        self.text_creator.draw_text(screen)
+        # self.text_creator.update_text()
+        # self.text_creator.draw_text(screen)
+        self.text_manager.draw()
 
     @staticmethod
     def draw_ui_rect():  # this will be replaced with a proper background... I think
@@ -63,7 +64,7 @@ class Program:
         pygame.draw.rect(screen, gv.GREEN, (670, 0, 130, 30))  # 'timer' rect
         pygame.draw.rect(screen, gv.GREEN, (670, 260, 130, 140))  # 'timer' rect
     
-    def draw_numpad(self):
+    def draw_numpad(self):  #TODO seperate this to a different module
         self.text_box.draw(screen)
         self.confirm_button.draw(screen)
         self.reset_button.draw(screen)

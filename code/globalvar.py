@@ -21,8 +21,8 @@ MAX_ATTEMPTS = 8
 remaining_attempts = MAX_ATTEMPTS
 secret_num = ""
 game_state = 'main_game'  # game_state types: 'main_game', 'lost', 'won', 'highscore', 'achievement'
-is_compared = False
-is_restarted = False
+is_compared = False  # this shouldn't exist
+is_restarted = False  # and neither should this
 
 # button variables
 num_input = ""
