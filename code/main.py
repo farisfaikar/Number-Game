@@ -2,8 +2,10 @@ import pygame
 import sys
 
 from random import randint
-from text import Text, TextBox
-from button import Button, ConfirmButton, ResetButton, RestartButton, HighscoreButton, AchievementButton
+from numpad import NumPad
+from button import RestartButton, HighscoreButton, AchievementButton
+from text import ClueText, TimerText, HighscoreText
+import numbergame
 import timer
 import highscore as hs
 import globalvar as gv
@@ -12,29 +14,17 @@ import globalvar as gv
 class Program:
     def __init__(self):
         # Enter instances here -----------------------------------------------------
-        self.text = Text()
+        numbergame.gen_secret_num()
 
         self.restart_button = RestartButton("Restart", 110, 30, (680, screen_height - 40), gv.RED)
         self.highscore_button = HighscoreButton("Highscore", 110, 30, (680, screen_height - 80), gv.BLUE)
         self.achievement_button = AchievementButton("Achievement", 110, 30, (680, screen_height - 120), gv.LIME)
 
-        self.grid_pos = []
-        self.set_numpad_pos(680, 40)
+        self.numpad = NumPad()
 
-        # Enter the coordinates using -> grid_pos[x][y]
-        self.text_box = TextBox(110, 30, (self.grid_pos[0][0]), gv.PURPLE, gv.WHITE)
-        self.button1 = Button("1", 30, 30, (self.grid_pos[0][1]), gv.ORANGE)
-        self.button2 = Button("2", 30, 30, (self.grid_pos[1][1]), gv.ORANGE)
-        self.button3 = Button("3", 30, 30, (self.grid_pos[2][1]), gv.ORANGE)
-        self.button4 = Button("4", 30, 30, (self.grid_pos[0][2]), gv.ORANGE)
-        self.button5 = Button("5", 30, 30, (self.grid_pos[1][2]), gv.ORANGE)
-        self.button6 = Button("6", 30, 30, (self.grid_pos[2][2]), gv.ORANGE)
-        self.button7 = Button("7", 30, 30, (self.grid_pos[0][3]), gv.ORANGE)
-        self.button8 = Button("8", 30, 30, (self.grid_pos[1][3]), gv.ORANGE)
-        self.button9 = Button("9", 30, 30, (self.grid_pos[2][3]), gv.ORANGE)
-        self.button0 = Button("0", 30, 30, (self.grid_pos[1][4]), gv.ORANGE)
-        self.reset_button = ResetButton("X", 30, 30, (self.grid_pos[0][4]), gv.RED)
-        self.confirm_button = ConfirmButton("C", 30, 30, (self.grid_pos[2][4]), gv.LIME)
+        self.clue_text = ClueText(10, 5, screen)
+        self.timer_text = TimerText(680, 5, screen)
+        self.highscore_text = HighscoreText(10, 5, screen)
 
         # Enter experimental instances here
 
@@ -42,53 +32,23 @@ class Program:
         # Enter functions here
         timer.count_up()
         self.draw_ui_rect()
-        self.text.draw_text(screen)
 
-        self.draw_numpad()
+        self.numpad.draw(screen)
         self.restart_button.draw(screen)
         self.highscore_button.draw(screen)
         self.achievement_button.draw(screen)
 
+        self.clue_text.draw()
+        self.timer_text.draw()
+        self.highscore_text.draw()
+
         # Enter experimental functions here
 
     @staticmethod
-    def draw_ui_rect():  # this will be replaced with a proper background... I think
+    def draw_ui_rect():
         pygame.draw.rect(screen, gv.CREAM, (670, 0, 280, 400))  # 'calculator' rect
         pygame.draw.rect(screen, gv.GREEN, (670, 0, 130, 30))  # 'timer' rect
         pygame.draw.rect(screen, gv.GREEN, (670, 260, 130, 140))  # 'timer' rect
-    
-    def draw_numpad(self):
-        self.text_box.draw(screen)
-        self.confirm_button.draw(screen)
-        self.reset_button.draw(screen)
-
-        self.button1.draw(screen)
-        self.button2.draw(screen)
-        self.button3.draw(screen)
-        self.button4.draw(screen)
-        self.button5.draw(screen)
-        self.button6.draw(screen)
-        self.button7.draw(screen)
-        self.button8.draw(screen)
-        self.button9.draw(screen)
-        self.button0.draw(screen)
-
-    def set_numpad_pos(self, initial_x, initial_y):
-        dynamic_x = initial_x
-        dynamic_y = initial_y
-        column_count = 3
-        row_count = 5
-        x_space = 40
-        y_space = 45
-
-        # Create a 3d list containing the button grid coordinates
-        for x in range(column_count):
-            self.grid_pos.append([])
-            for y in range(row_count):
-                self.grid_pos[x].append([dynamic_x, dynamic_y])
-                dynamic_y += y_space
-            dynamic_y = initial_y
-            dynamic_x += x_space
 
 
 class CRT:
