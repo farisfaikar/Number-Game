@@ -2,9 +2,15 @@ import pygame
 import sys
 
 from random import randint
+<<<<<<< HEAD
 from text import Text, TextBox, TextManager
 from button import Button, ConfirmButton, ResetButton, RestartButton, HighscoreButton, AchievementButton
 import text
+=======
+from numpad import NumPad
+from button import RestartButton, HighscoreButton, AchievementButton
+from text import ClueText, TimerText, HighscoreText
+>>>>>>> 060f11eaa8cf6a54be7a01d37d284effd0923d3f
 import numbergame
 import timer
 import highscore as hs
@@ -20,6 +26,7 @@ class Program:
         self.highscore_button = HighscoreButton("Highscore", 110, 30, (680, screen_height - 80), gv.BLUE)
         self.achievement_button = AchievementButton("Achievement", 110, 30, (680, screen_height - 120), gv.LIME)
 
+<<<<<<< HEAD
         self.grid_pos = []
         self.set_numpad_pos(680, 40)
 
@@ -37,6 +44,13 @@ class Program:
         self.button0 = Button("0", 30, 30, (self.grid_pos[1][4]), gv.ORANGE)
         self.reset_button = ResetButton("X", 30, 30, (self.grid_pos[0][4]), gv.RED)
         self.confirm_button = ConfirmButton("=", 30, 30, (self.grid_pos[2][4]), gv.LIME)
+=======
+        self.numpad = NumPad()
+
+        self.clue_text = ClueText(10, 5, screen)
+        self.timer_text = TimerText(680, 5, screen)
+        self.highscore_text = HighscoreText(10, 5, screen)
+>>>>>>> 060f11eaa8cf6a54be7a01d37d284effd0923d3f
 
         # Enter experimental instances here
         # self.text_creator = text.TextCreator()
@@ -46,12 +60,19 @@ class Program:
         # Enter functions here
         timer.count_up()
         self.draw_ui_rect()
+<<<<<<< HEAD
         # self.text.draw_text(screen)
+=======
+>>>>>>> 060f11eaa8cf6a54be7a01d37d284effd0923d3f
 
-        self.draw_numpad()
+        self.numpad.draw(screen)
         self.restart_button.draw(screen)
         self.highscore_button.draw(screen)
         self.achievement_button.draw(screen)
+
+        self.clue_text.draw()
+        self.timer_text.draw()
+        self.highscore_text.draw()
 
         # Enter experimental functions here
         # self.text_creator.update_text()
@@ -59,10 +80,11 @@ class Program:
         self.text_manager.draw()
 
     @staticmethod
-    def draw_ui_rect():  # this will be replaced with a proper background... I think
+    def draw_ui_rect():
         pygame.draw.rect(screen, gv.CREAM, (670, 0, 280, 400))  # 'calculator' rect
         pygame.draw.rect(screen, gv.GREEN, (670, 0, 130, 30))  # 'timer' rect
         pygame.draw.rect(screen, gv.GREEN, (670, 260, 130, 140))  # 'timer' rect
+<<<<<<< HEAD
     
     def draw_numpad(self):  #TODO seperate this to a different module
         self.text_box.draw(screen)
@@ -91,6 +113,8 @@ class Program:
             self.grid_pos.append([])
             for y in range(row_count):
                 self.grid_pos[x].append([x * x_space + initial_x, y * y_space + initial_y])
+=======
+>>>>>>> 060f11eaa8cf6a54be7a01d37d284effd0923d3f
 
 
 class CRT:
