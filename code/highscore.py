@@ -1,5 +1,4 @@
 import json
-import text
 import globalvar as gv
 from operator import itemgetter
 
@@ -20,7 +19,5 @@ def load_hs():
 
 def save_score():
     highscore = load_hs()
-    player_name = gv.text_input
-    norm_player_name = text.normalize_text(player_name)
-    highscore.append([norm_player_name, gv.lapped_time])
+    highscore.append([gv.text_input, gv.lapped_time])
     save_hs(sorted(highscore, key=itemgetter(1), reverse=False))

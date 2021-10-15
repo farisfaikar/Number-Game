@@ -13,12 +13,12 @@ PURPLE = (45, 22, 45)
 chary_font = 'font/chary___.ttf'
 
 # numbergame variables
+MAX_ATTEMPTS = 8
+remaining_attempts = MAX_ATTEMPTS
 correct_num = []
 correct_pos = []
 combinations = []
 attempts = 0
-MAX_ATTEMPTS = 8
-remaining_attempts = MAX_ATTEMPTS
 secret_num = ""
 game_state = 'main_game'  # game_state types: 'main_game', 'lost', 'won', 'highscore', 'achievement'
 

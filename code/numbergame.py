@@ -9,12 +9,10 @@ def gen_secret_num():
             continue
         else:
             gv.secret_num = gv.secret_num + r_num
+    print(f"DEBUG: secret num = {gv.secret_num}")  # debug: print out secret number
 
 
 def compare():
-    gen_secret_num()
-    print(f"DEBUG: secret num = {gv.secret_num}")  # debug: print out secret number
-
     _entered_num = gv.num_input
     _correct_num = 0
     _correct_pos = 0
@@ -37,6 +35,8 @@ def compare():
         gv.combinations.append(_entered_num)
         gv.correct_num.append(_correct_num)
         gv.correct_pos.append(_correct_pos)
+
+    gv.is_compared = True
 
 
 def restart():
