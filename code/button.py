@@ -76,6 +76,8 @@ class ConfirmButton(Button):
         if len(gv.num_input) == 4:
             if gv.game_state == 'main_game':
                 numbergame.compare()
+                if gv.game_state == 'won' or gv.game_state == 'lost':
+                    timer.stop_timer()
             gv.num_input = ""
 
 
@@ -93,8 +95,8 @@ class RestartButton(Button):
 
 class HighscoreButton(Button):
     def button_action(self):
-        timer.stop_timer()
         gv.game_state = 'highscore'
+        timer.stop_timer()
 
 
 class AchievementButton(Button):
