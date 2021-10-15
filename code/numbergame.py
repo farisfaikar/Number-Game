@@ -50,4 +50,3 @@ def restart():
     gv.text_input = ""
 
     gen_secret_num()
-    gv.is_restarted = True

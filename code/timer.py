@@ -35,10 +35,3 @@ def stop_timer():
 
 def start_timer():
     gv.is_timer_running = True
-
-
-def reformat_time(time):
-    seconds_ = math.floor(time / 1000)
-    str_seconds = add_0(str(seconds_ % 60))
-    str_minutes = add_0(str(math.floor(seconds_ / 60)))
-    return f"{str_minutes}:{str_seconds}"
