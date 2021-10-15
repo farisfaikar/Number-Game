@@ -10,6 +10,12 @@ def count_up():
     minutes_ = math.floor(dynamic_time / 1000 / 60) % 60
     hours_ = math.floor(dynamic_time / 1000 / 60 / 60)
 
+    def add_0(num):
+        if len(str(num)) == 1:
+            return f"0{num}"
+        else:
+            return f"{num}"
+
     if gv.is_timer_running:
         gv.seconds = add_0(seconds_)
         gv.minutes = add_0(minutes_)
@@ -20,13 +26,6 @@ def count_up():
 def reset_timer():
     start_timer()
     gv.static_time = pygame.time.get_ticks()
-
-
-def add_0(num):
-    if len(str(num)) == 1:
-        return f"0{num}"
-    else:
-        return f"{num}"
 
 
 def stop_timer():
