@@ -5,8 +5,7 @@ import globalvar as gv
 
 
 class Text:
-    def __init__(self, x, y, screen):
-        self.screen = screen
+    def __init__(self, x, y):
         self.x = x
         self.y = y
         self.y_space = 20
@@ -17,16 +16,16 @@ class Text:
     def add_text(self, text, color):
         self.text_data.append([text, color])
 
-    def render(self):
+    def render(self, screen):
         for i, (text, color) in enumerate(self.text_data):
             text_obj = self.chary.render(text, True, color)
-            self.screen.blit(text_obj, (self.x, i * self.y_space + self.y))
+            screen.blit(text_obj, (self.x, i * self.y_space + self.y))
 
         self.text_data = []
 
 
 class ClueText(Text):
-    def draw(self):
+    def draw(self, screen):
         if gv.game_state == 'won' or gv.game_state == 'lost' or gv.game_state == 'main_game':
             self.add_text(f"Guess the 4 digit number combination! You have {gv.remaining_attempts} "
                           f"attempts left", gv.CREAM)
@@ -43,17 +42,17 @@ class ClueText(Text):
             self.add_text("Press the restart button to play again", gv.RED)
             self.add_text(f"Enter your name! (5 letters): {gv.text_input}", gv.ORANGE)
 
-        self.render()
+        self.render(screen)
 
 
 class TimerText(Text):
-    def draw(self):
+    def draw(self, screen):
         self.add_text(f"Timer: {gv.minutes}:{gv.seconds}", gv.WHITE)
-        self.render()
+        self.render(screen)
 
 
 class HighscoreText(Text):
-    def draw(self):
+    def draw(self, screen):
         if gv.game_state == 'highscore':
             max_highscore = 9
             self.add_text("Highscores!", gv.CREAM)
@@ -70,7 +69,7 @@ class HighscoreText(Text):
                     dashes = "-" * gv.max_text_length
                     self.add_text(f"#{i + len(highscore) + 1}: {dashes} - Time: --:--", gv.WHITE)
 
-        self.render()
+        self.render(screen)
 
     @staticmethod
     def reformat_name(name):

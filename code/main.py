@@ -22,9 +22,9 @@ class Program:
 
         self.numpad = NumPad()
 
-        self.clue_text = ClueText(10, 5, screen)
-        self.timer_text = TimerText(680, 5, screen)
-        self.highscore_text = HighscoreText(10, 5, screen)
+        self.clue_text = ClueText(10, 5)
+        self.timer_text = TimerText(680, 5)
+        self.highscore_text = HighscoreText(10, 5)
 
         # Enter experimental instances here
 
@@ -38,9 +38,9 @@ class Program:
         self.highscore_button.draw(screen)
         self.achievement_button.draw(screen)
 
-        self.clue_text.draw()
-        self.timer_text.draw()
-        self.highscore_text.draw()
+        self.clue_text.draw(screen)
+        self.timer_text.draw(screen)
+        self.highscore_text.draw(screen)
 
         # Enter experimental functions here
 
