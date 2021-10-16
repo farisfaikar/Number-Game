@@ -54,7 +54,7 @@ class Program:
 class CRT:
     def __init__(self):
         self.tv_width = 670
-        self.tv = pygame.image.load('sprites/tv.png').convert_alpha()
+        self.tv = pygame.image.load('sprite/tv.png').convert_alpha()
         self.tv = pygame.transform.scale(self.tv, (self.tv_width, screen_height))
 
     def create_crt_lines(self):
@@ -80,7 +80,7 @@ def main():
     # Initialize pygame
     pygame.init()
     clock = pygame.time.Clock()
-    icon = pygame.image.load('sprites/number_game.png')
+    icon = pygame.image.load('sprite/number_game.png')
 
     # Initiate instances
     program = Program()
