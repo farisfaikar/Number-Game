@@ -46,9 +46,9 @@ class Program:
 
     @staticmethod
     def draw_ui_rect():
-        pygame.draw.rect(screen, gv.CREAM, (670, 0, 280, 400))  # 'calculator' rect
+        pygame.draw.rect(screen, gv.CREAM, (670, 0, 280, 400))  # 'numpad' rect
         pygame.draw.rect(screen, gv.GREEN, (670, 0, 130, 30))  # 'timer' rect
-        pygame.draw.rect(screen, gv.GREEN, (670, 260, 130, 140))  # 'timer' rect
+        pygame.draw.rect(screen, gv.GREEN, (670, 260, 130, 140))  # 'buttons' rect
 
 
 class CRT:
