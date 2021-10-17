@@ -20,7 +20,7 @@ correct_pos = []
 combinations = []
 attempts = 0
 secret_num = ""
-game_state = 'main_game'  # game_state types: 'main_game', 'lost', 'won', 'highscore', 'achievement'
+game_state = 'won'  # game_state types: 'main_game', 'lost', 'won', 'highscore', 'achievement'
 
 # button variables
 num_input = ""
