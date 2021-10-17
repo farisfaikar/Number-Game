@@ -56,7 +56,7 @@ class Button:
                 self.pressed = True
             else:
                 self.dynamic_elevation = self.elevation
-                if self.pressed is True:
+                if self.pressed:
                     self.button_action()
                     self.pressed = False
         else:
@@ -79,6 +79,29 @@ class ConfirmButton(Button):
                 if gv.game_state == 'won' or gv.game_state == 'lost':
                     timer.stop_timer()
             gv.num_input = ""
+
+    def check_click(self):
+        mouse_pos = pygame.mouse.get_pos()
+
+        if len(gv.num_input) < 4:
+            self.dynamic_elevation = 0
+            self.top_color = gv.GREEN
+
+        else:
+            if self.hitbox_rect.collidepoint(mouse_pos):
+                self.top_color = gv.WHITE
+                if pygame.mouse.get_pressed(num_buttons=3)[0]:
+                    self.dynamic_elevation = 0
+                    self.pressed = True
+                else:
+                    self.dynamic_elevation = self.elevation
+                    if self.pressed:
+                        self.button_action()
+                        self.pressed = False
+            else:
+                self.pressed = False
+                self.dynamic_elevation = self.elevation
+                self.top_color = self.TOP_COLOR
 
 
 class ResetButton(Button):
