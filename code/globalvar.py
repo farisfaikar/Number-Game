@@ -20,7 +20,7 @@ correct_pos = []
 combinations = []
 attempts = 0
 secret_num = ""
-game_state = 'won'  # game_state types: 'main_game', 'lost', 'won', 'highscore', 'achievement'
+game_state = 'main_game'  # game_state identifiers: 'main_game', 'lost', 'won', 'highscore', 'achievement'
 
 # button variables
 num_input = ""
@@ -36,4 +36,5 @@ is_timer_running = True
 
 # text variables
 text_input = ""
-max_text_length = 10
+MAX_TEXT_LENGTH = 10
+MAX_HIGHSCORE_LIST = 9

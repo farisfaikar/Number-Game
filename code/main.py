@@ -16,9 +16,9 @@ class Program:
         # Enter instances here -----------------------------------------------------
         numbergame.gen_secret_num()
 
-        self.restart_button = RestartButton("Restart", 110, 30, (680, screen_height - 40), gv.RED)
-        self.highscore_button = HighscoreButton("Highscore", 110, 30, (680, screen_height - 80), gv.BLUE)
-        self.achievement_button = AchievementButton("Achievement", 110, 30, (680, screen_height - 120), gv.LIME)
+        self.restart_button = RestartButton("Restart", 110, 30, (680, 360), gv.RED)
+        self.highscore_button = HighscoreButton("Highscore", 110, 30, (680, 320), gv.BLUE)
+        self.achievement_button = AchievementButton("Achievement", 110, 30, (680, 280), gv.LIME)
 
         self.numpad = NumPad()
 

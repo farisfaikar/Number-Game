@@ -11,6 +11,7 @@ class Text:
         self.y = y
         self.y_space = 20
         self.text_data = []
+
         # font
         self.chary = pygame.font.Font(gv.chary_font, 20)
 
@@ -39,9 +40,21 @@ class ClueText(Text):
         if gv.game_state == 'won':
             self.append_text_data(f"You win! The correct number was {gv.secret_num}", gv.LIME)
             self.append_text_data("Press the restart button to play again", gv.RED)
-            self.append_text_data(f"Enter your name! ({gv.max_text_length} letters): {gv.text_input}", gv.ORANGE)
-            last_text = self.text_data[-1][0]
-            self.render_blinking_cursor(screen, last_text, gv.ORANGE)
+
+            # check if player is worthy of entering the higscores
+            highscore = hs.load_hs()
+            is_player_worthy = False
+            for i in range(len(highscore)):
+                if highscore[i][1] > gv.lapped_time and i + 1 < gv.MAX_HIGHSCORE_LIST:
+                    is_player_worthy = True
+                    break
+
+            if is_player_worthy:
+                self.append_text_data(f"Enter your name! ({gv.MAX_TEXT_LENGTH} letters): {gv.text_input}", gv.ORANGE)
+                last_text = self.text_data[-1][0]
+                self.render_blinking_cursor(screen, last_text, gv.ORANGE)
+                if time.time() % 1 > 0.5 and len(gv.text_input) > 0:
+                    self.append_text_data("---Press Enter---", gv.BLUE)
 
         if gv.game_state == 'lost':
             self.append_text_data(f"You have run out of attempt! You lost. The correct number was {gv.secret_num}",
@@ -51,15 +64,14 @@ class ClueText(Text):
         self.render(screen)
 
     def render_blinking_cursor(self, screen, text, color):
-        text_obj = self.chary.render(text, True, color)
-        text_rect = text_obj.get_rect()
-        cursor = pygame.Rect(text_rect.topright, (9, text_rect.height + 2))
+        text_obj = self.chary.render(text, False, color)
+        text_rect = text_obj.get_rect(bottomleft=(self.x, self.y + len(self.text_data) * self.y_space))
+        cursor_width = 9
+        cursor_height = text_rect.height + 2
+        cursor = pygame.Rect(text_rect.topright, (cursor_width, cursor_height))
 
-        if time.time() % 1 > 0.5:
-            # set cursor position
+        if time.time() % 1 > 0.5 and len(gv.text_input) != gv.MAX_TEXT_LENGTH:
             cursor.midleft = text_rect.midright
-            print(cursor.x, cursor.y)
-
             pygame.draw.rect(screen, color, cursor)
 
 
@@ -72,44 +84,42 @@ class TimerText(Text):
 class HighscoreText(Text):
     def draw(self, screen):
         if gv.game_state == 'highscore':
-            max_highscore = 9
             self.append_text_data("Highscores!", gv.CREAM)
 
             highscore = hs.load_hs()
             for index, [player_name, player_time] in enumerate(highscore):
                 formatted_player_time = self.reformat_time(player_time)
                 formatted_player_name = self.reformat_name(player_name)
-                if index < max_highscore:
+                if index < gv.MAX_HIGHSCORE_LIST:
                     self.append_text_data(f"#{index + 1}: {formatted_player_name} - Time: {formatted_player_time}",
                                           gv.WHITE)
 
-            if len(highscore) < max_highscore:
-                for i in range(max_highscore - len(highscore)):
-                    dashes = "-" * gv.max_text_length
+            if len(highscore) < gv.MAX_HIGHSCORE_LIST:
+                for i in range(gv.MAX_HIGHSCORE_LIST - len(highscore)):
+                    dashes = "-" * gv.MAX_TEXT_LENGTH
                     self.append_text_data(f"#{i + len(highscore) + 1}: {dashes} - Time: --:--", gv.WHITE)
 
         self.render(screen)
 
     @staticmethod
     def reformat_name(name):
-        gv.max_text_length = 10
         text_length = len(name)
-        if text_length < gv.max_text_length:
-            for i in range(gv.max_text_length - text_length):
+        if text_length < gv.MAX_TEXT_LENGTH:
+            for i in range(gv.MAX_TEXT_LENGTH - text_length):
                 name += " "
             return name
         else:
             return name
 
     @staticmethod
-    def reformat_time(time):
+    def reformat_time(miliseconds):
         def add_0(num):
             if len(str(num)) == 1:
                 return f"0{num}"
             else:
                 return f"{num}"
 
-        seconds = math.floor(time / 1000)
+        seconds = math.floor(miliseconds / 1000)
         str_seconds = add_0(str(seconds % 60))
         str_minutes = add_0(str(math.floor(seconds / 60)))
         return f"{str_minutes}:{str_seconds}"
