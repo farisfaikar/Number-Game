@@ -44,6 +44,8 @@ class ClueText(Text):
             # check if player is worthy of entering the higscores
             highscore = hs.load_hs()
             is_player_worthy = False
+            if len(highscore) == 0:
+                is_player_worthy = True
             for i in range(len(highscore)):
                 if highscore[i][1] > gv.lapped_time and i + 1 < gv.MAX_HIGHSCORE_LIST:
                     is_player_worthy = True
