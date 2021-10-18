@@ -47,9 +47,13 @@ class ClueText(Text):
             if len(highscore) == 0:
                 is_player_worthy = True
             for i in range(len(highscore)):
-                if highscore[i][1] > gv.lapped_time and i + 1 < gv.MAX_HIGHSCORE_LIST:
-                    is_player_worthy = True
-                    break
+                if i + 1 < gv.MAX_HIGHSCORE_LIST:
+                    if highscore[i][1] > gv.lapped_time:
+                        is_player_worthy = True
+                        break
+                    elif i + 1 == len(highscore):
+                        is_player_worthy = True
+                        break
 
             if is_player_worthy:
                 self.append_text_data(f"Enter your name! ({gv.MAX_TEXT_LENGTH} letters): {gv.text_input}", gv.ORANGE)
