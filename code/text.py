@@ -83,7 +83,7 @@ class ClueText(Text):
 
 class TimerText(Text):
     def draw(self, screen):
-        self.append_text_data(f"Timer: {gv.minutes}:{gv.seconds}", gv.WHITE)
+        self.append_text_data(f"T+: {gv.hours}:{gv.minutes}:{gv.seconds}", gv.WHITE)
         self.render(screen)
 
 
