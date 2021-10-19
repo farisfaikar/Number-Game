@@ -167,6 +167,7 @@ class ConfirmButton(Button):
 class ResetButton(Button):
     def button_action(self):
         reset_pressed = mixer.Sound('sound/reset_pressed.ogg')
+        reset_pressed.set_volume(0.5)
         reset_pressed.play()
 
         gv.num_input = ""

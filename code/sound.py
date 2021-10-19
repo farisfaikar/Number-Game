@@ -20,6 +20,7 @@ class Sound:
         mixer.music.load('sound/server_ambient.ogg')
         mixer.music.set_volume(0.5)
         self.boot_up = mixer.Sound(random_boot_up)
+        self.boot_up.set_volume(0.7)
 
     @staticmethod
     def play_ambient():
