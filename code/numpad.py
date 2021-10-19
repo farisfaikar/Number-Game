@@ -1,6 +1,6 @@
 import pygame
 import globalvar as gv
-from button import Button, ConfirmButton, ResetButton
+from button import NumButton, ConfirmButton, ResetButton
 
 
 class NumDisplay:
@@ -31,16 +31,16 @@ class NumPad:
 
         # Enter the coordinates using -> grid_pos[x][y]
         self.text_box = NumDisplay(110, 30, (self.grid_pos[0][0]), gv.PURPLE, gv.WHITE)
-        self.button1 = Button("1", 30, 30, (self.grid_pos[0][1]), gv.ORANGE)
-        self.button2 = Button("2", 30, 30, (self.grid_pos[1][1]), gv.ORANGE)
-        self.button3 = Button("3", 30, 30, (self.grid_pos[2][1]), gv.ORANGE)
-        self.button4 = Button("4", 30, 30, (self.grid_pos[0][2]), gv.ORANGE)
-        self.button5 = Button("5", 30, 30, (self.grid_pos[1][2]), gv.ORANGE)
-        self.button6 = Button("6", 30, 30, (self.grid_pos[2][2]), gv.ORANGE)
-        self.button7 = Button("7", 30, 30, (self.grid_pos[0][3]), gv.ORANGE)
-        self.button8 = Button("8", 30, 30, (self.grid_pos[1][3]), gv.ORANGE)
-        self.button9 = Button("9", 30, 30, (self.grid_pos[2][3]), gv.ORANGE)
-        self.button0 = Button("0", 30, 30, (self.grid_pos[1][4]), gv.ORANGE)
+        self.button1 = NumButton("1", 30, 30, (self.grid_pos[0][1]), gv.ORANGE)
+        self.button2 = NumButton("2", 30, 30, (self.grid_pos[1][1]), gv.ORANGE)
+        self.button3 = NumButton("3", 30, 30, (self.grid_pos[2][1]), gv.ORANGE)
+        self.button4 = NumButton("4", 30, 30, (self.grid_pos[0][2]), gv.ORANGE)
+        self.button5 = NumButton("5", 30, 30, (self.grid_pos[1][2]), gv.ORANGE)
+        self.button6 = NumButton("6", 30, 30, (self.grid_pos[2][2]), gv.ORANGE)
+        self.button7 = NumButton("7", 30, 30, (self.grid_pos[0][3]), gv.ORANGE)
+        self.button8 = NumButton("8", 30, 30, (self.grid_pos[1][3]), gv.ORANGE)
+        self.button9 = NumButton("9", 30, 30, (self.grid_pos[2][3]), gv.ORANGE)
+        self.button0 = NumButton("0", 30, 30, (self.grid_pos[1][4]), gv.ORANGE)
         self.reset_button = ResetButton("X", 30, 30, (self.grid_pos[0][4]), gv.RED)
         self.confirm_button = ConfirmButton("=", 30, 30, (self.grid_pos[2][4]), gv.LIME)
 

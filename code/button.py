@@ -8,6 +8,7 @@ class Button:
     def __init__(self, text, width, height, pos, color):
         # Core attributes
         self.pressed = False
+        self.executed = False
         self.elevation = 4
         self.dynamic_elevation = self.elevation
         self.original_y_pos = pos[1]
@@ -71,6 +72,41 @@ class Button:
                 gv.num_input += self.text
 
 
+class NumButton(Button):
+    def check_click(self):
+        mouse_pos = pygame.mouse.get_pos()
+
+        if len(gv.num_input) <= 0:
+            self.executed = False
+
+        if self.executed:
+            self.top_color = gv.ORANGE
+            self.dynamic_elevation = 0
+        elif self.hitbox_rect.collidepoint(mouse_pos):
+            self.top_color = gv.WHITE
+            if pygame.mouse.get_pressed(num_buttons=3)[0]:
+                self.dynamic_elevation = 0
+                self.pressed = True
+            else:
+                if self.pressed:
+                    if len(gv.num_input) < 4:
+                        self.executed = True
+                    else:
+                        self.dynamic_elevation = self.elevation
+                    self.button_action()
+                    self.pressed = False
+        else:
+            self.pressed = False
+            self.dynamic_elevation = self.elevation
+            self.top_color = self.TOP_COLOR
+
+    def button_action(self):
+        user_input_length = len(gv.num_input)
+        if user_input_length < 4:
+            if gv.num_input.find(self.text) == -1:
+                gv.num_input += self.text
+
+
 class ConfirmButton(Button):
     def button_action(self):
         if len(gv.num_input) == 4:
@@ -85,8 +121,7 @@ class ConfirmButton(Button):
 
         if len(gv.num_input) < 4:
             self.dynamic_elevation = 0
-            self.top_color = gv.GREEN
-
+            self.top_color = gv.LIME
         else:
             if self.hitbox_rect.collidepoint(mouse_pos):
                 self.top_color = gv.WHITE
