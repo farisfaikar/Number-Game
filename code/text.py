@@ -60,7 +60,7 @@ class ClueText(Text):
                 last_text = self.text_data[-1][0]
                 self.render_blinking_cursor(screen, last_text, gv.ORANGE)
                 if time.time() % 1 > 0.5 and len(gv.text_input) > 0:
-                    self.append_text_data("---Press Enter---", gv.BLUE)
+                    self.append_text_data("---Press Enter---", gv.CREAM)
 
         if gv.game_state == 'lost':
             self.append_text_data(f"You have run out of attempt! You lost. The correct number was {gv.secret_num}",

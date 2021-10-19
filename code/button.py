@@ -1,4 +1,5 @@
 import pygame
+from pygame import mixer
 import numbergame
 import timer
 import globalvar as gv
@@ -66,10 +67,17 @@ class Button:
             self.top_color = self.TOP_COLOR
 
     def button_action(self):
+        self.play_button_pressed()
+
         user_input_length = len(gv.num_input)
         if user_input_length < 4:
             if gv.num_input.find(self.text) == -1:
                 gv.num_input += self.text
+
+    @staticmethod
+    def play_button_pressed():
+        button_pressed = mixer.Sound('sound/button_pressed.ogg')
+        button_pressed.play()
 
 
 class NumButton(Button):
@@ -101,6 +109,9 @@ class NumButton(Button):
             self.top_color = self.TOP_COLOR
 
     def button_action(self):
+        button_pressed = mixer.Sound('sound/button_pressed.ogg')
+        button_pressed.play()
+
         user_input_length = len(gv.num_input)
         if user_input_length < 4:
             if gv.num_input.find(self.text) == -1:
@@ -109,11 +120,21 @@ class NumButton(Button):
 
 class ConfirmButton(Button):
     def button_action(self):
+        confirm_pressed = mixer.Sound('sound/confirm_pressed.ogg')
+        confirm_pressed.play()
+        self.executed = False
+
         if len(gv.num_input) == 4:
             if gv.game_state == 'main_game':
                 numbergame.compare()
                 if gv.game_state == 'won' or gv.game_state == 'lost':
                     timer.stop_timer()
+                if gv.game_state == 'won':
+                    won_jingle = mixer.Sound('sound/won_jingle.ogg')
+                    won_jingle.play()
+                if gv.game_state == 'lost':
+                    lost_jingle = mixer.Sound('sound/lost_jingle.ogg')
+                    lost_jingle.play()
             gv.num_input = ""
 
     def check_click(self):
@@ -123,6 +144,10 @@ class ConfirmButton(Button):
             self.dynamic_elevation = 0
             self.top_color = gv.LIME
         else:
+            if not self.executed:
+                confirm_popup = mixer.Sound('sound/confirm_popup.ogg')
+                confirm_popup.play()
+                self.executed = True
             if self.hitbox_rect.collidepoint(mouse_pos):
                 self.top_color = gv.WHITE
                 if pygame.mouse.get_pressed(num_buttons=3)[0]:
@@ -141,11 +166,17 @@ class ConfirmButton(Button):
 
 class ResetButton(Button):
     def button_action(self):
+        reset_pressed = mixer.Sound('sound/reset_pressed.ogg')
+        reset_pressed.play()
+
         gv.num_input = ""
 
 
 class RestartButton(Button):
     def button_action(self):
+        restart_pressed = mixer.Sound('sound/restart_pressed.ogg')
+        restart_pressed.play()
+
         numbergame.restart()
         timer.reset_timer()
         gv.game_state = 'main_game'
@@ -153,11 +184,15 @@ class RestartButton(Button):
 
 class HighscoreButton(Button):
     def button_action(self):
+        self.play_button_pressed()
+
         gv.game_state = 'highscore'
         timer.stop_timer()
 
 
 class AchievementButton(Button):
     def button_action(self):
+        self.play_button_pressed()
+
         print("Display Achievements")
         gv.game_state = 'achievement'

@@ -1,4 +1,5 @@
 import pygame
+from pygame import mixer
 import sys
 
 from random import randint
@@ -7,6 +8,7 @@ from button import RestartButton, HighscoreButton, AchievementButton
 from text import ClueText, TimerText, HighscoreText
 import numbergame
 import timer
+from sound import Sound
 import highscore as hs
 import globalvar as gv
 
@@ -25,6 +27,11 @@ class Program:
         self.clue_text = ClueText(10, 5)
         self.timer_text = TimerText(680, 5)
         self.highscore_text = HighscoreText(10, 5)
+
+        pygame.mixer.pre_init()
+        self.sound = Sound()
+        self.sound.play_ambient()
+        self.sound.boot_up.play()
 
         # Enter experimental instances here
 
@@ -99,13 +106,20 @@ def main():
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if gv.game_state == 'won':
+                    keyboard_pressed = mixer.Sound('sound/keyboard_pressed.ogg')
+                    backspace_pressed = mixer.Sound('sound/backspace_pressed.ogg')
+                    enter_pressed = mixer.Sound('sound/confirm_pressed.ogg')
+
                     if event.key == pygame.K_RETURN:
+                        enter_pressed.play()
                         gv.game_state = 'highscore'
                         hs.save_score()
                     if event.key == pygame.K_BACKSPACE:
+                        backspace_pressed.play()
                         gv.text_input = gv.text_input[:-1]
                     else:
                         if len(gv.text_input) < 10:
+                            keyboard_pressed.play()
                             gv.text_input += event.unicode
 
         # Game code
