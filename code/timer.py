@@ -1,14 +1,13 @@
 import pygame
-import math
 import globalvar as gv
 
 
 def count_up():
     elapsed_time = pygame.time.get_ticks()
     dynamic_time = elapsed_time - gv.static_time
-    seconds_ = math.floor(dynamic_time / 1000) % 60
-    minutes_ = math.floor(dynamic_time / 1000 / 60) % 60
-    hours_ = math.floor(dynamic_time / 1000 / 60 / 60)
+    seconds_ = dynamic_time // 1000 % 60
+    minutes_ = dynamic_time // 1000 // 60 % 60
+    hours_ = dynamic_time // 1000 // 60 // 60
 
     def add_0(num):
         if len(str(num)) == 1:
