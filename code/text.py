@@ -1,5 +1,4 @@
 import pygame
-import math
 import highscore as hs
 import globalvar as gv
 import time
@@ -24,6 +23,13 @@ class Text:
             screen.blit(text_obj, (self.x, i * self.y_space + self.y))
 
         self.text_data = []
+
+
+class BootText(Text):
+    def draw(self, screen):
+        self.append_text_data("########## Number Game ##########", gv.CREAM)
+
+        self.render(screen)
 
 
 class ClueText(Text):
@@ -90,7 +96,7 @@ class TimerText(Text):
 class HighscoreText(Text):
     def draw(self, screen):
         if gv.game_state == 'highscore':
-            self.append_text_data("Highscores!", gv.CREAM)
+            self.append_text_data("Highscores!", gv.BLUE)
 
             highscore = hs.load_hs()
             for index, [player_name, player_time] in enumerate(highscore):
@@ -125,7 +131,26 @@ class HighscoreText(Text):
             else:
                 return f"{num}"
 
-        seconds = math.floor(miliseconds / 1000)
+        seconds = miliseconds // 1000
         str_seconds = add_0(str(seconds % 60))
-        str_minutes = add_0(str(math.floor(seconds / 60)))
+        str_minutes = add_0(str(seconds // 60))
         return f"{str_minutes}:{str_seconds}"
+
+
+class AchievementText(Text):
+    def draw(self, screen):
+        if gv.game_state == 'achievement':
+            self.append_text_data("Achievements!", gv.LIME)
+            achievements = {'achv01': "X", 'achv02': " ", 'achv03': "X", 'achv04': " ", 'achv05': " ", 'achv06': " "}
+            self.append_text_data(f"-[{achievements['achv01']}]- I did it!: Finish the puzzle for the first time",
+                                  gv.WHITE)
+            self.append_text_data(f"-[{achievements['achv02']}]- Quick Solver: Finish the puzzle in less than 1 minute",
+                                  gv.WHITE)
+            self.append_text_data(
+                f"-[{achievements['achv03']}]- Speedrunner: Finish the puzzle in less than 10 seconds", gv.WHITE)
+            self.append_text_data(f"-[{achievements['achv04']}]- The Dragon: Solve the puzzle in one attempt", gv.WHITE)
+            self.append_text_data(f"-[{achievements['achv05']}]- Sloth: Finish the puzzle in more than an hour",
+                                  gv.WHITE)
+            self.append_text_data(f"-[{achievements['achv06']}]- AFK: Leave the game running for a day", gv.WHITE)
+
+            self.render(screen)

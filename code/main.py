@@ -5,12 +5,25 @@ import sys
 from random import randint
 from numpad import NumPad
 from button import RestartButton, HighscoreButton, AchievementButton
-from text import ClueText, TimerText, HighscoreText
+from text import ClueText, TimerText, HighscoreText, AchievementText, BootText
 import numbergame
 import timer
 from sound import Sound
 import highscore as hs
 import globalvar as gv
+
+
+class BootMenu:
+    def __init__(self):
+        pygame.mixer.pre_init()
+        self.sound = Sound()
+        self.sound.play_ambient()
+        self.sound.play_boot_up()
+
+        self.boot_text = BootText(10, 5)
+
+    def run(self):
+        self.boot_text.draw(screen)
 
 
 class Program:
@@ -25,13 +38,9 @@ class Program:
         self.numpad = NumPad()
 
         self.clue_text = ClueText(10, 5)
-        self.timer_text = TimerText(680, 5)
         self.highscore_text = HighscoreText(10, 5)
-
-        pygame.mixer.pre_init()
-        self.sound = Sound()
-        self.sound.play_ambient()
-        self.sound.boot_up.play()
+        self.achievement_text = AchievementText(10, 5)
+        self.timer_text = TimerText(680, 5)
 
         # Enter experimental instances here
 
@@ -50,6 +59,7 @@ class Program:
         self.highscore_text.draw(screen)
 
         # Enter experimental functions here
+        self.achievement_text.draw(screen)
 
     @staticmethod
     def draw_ui_rect():
@@ -59,14 +69,15 @@ class Program:
 
 
 class CRT:
-    def __init__(self):
-        self.tv_width = 670
+    def __init__(self, tv_width, tv_height):
+        self.tv_width = tv_width
+        self.tv_height = tv_height
         self.tv = pygame.image.load('sprite/tv.png').convert_alpha()
-        self.tv = pygame.transform.scale(self.tv, (self.tv_width, screen_height))
+        self.tv = pygame.transform.scale(self.tv, (self.tv_width, self.tv_height))
 
     def create_crt_lines(self):
         line_height = 3
-        line_amount = int(screen_height / line_height)
+        line_amount = int(self.tv_height / line_height)
         for line in range(line_amount):
             y_pos = line * line_height
             pygame.draw.line(self.tv, 'black', (0, y_pos), (self.tv_width, y_pos), 1)
@@ -77,25 +88,53 @@ class CRT:
         screen.blit(self.tv, (0, 0))
 
 
-# Executables -------------------------------------------------------------
+# Game Setups -------------------------------------------------------------
+# Initialize pygame
+pygame.init()
+clock = pygame.time.Clock()
+icon = pygame.image.load('sprite/number_game.png')
+
+# Initiate screen
 screen_width = 800
 screen_height = 400
 screen = pygame.display.set_mode((screen_width, screen_height))
 
+# Set caption, icon, color
+pygame.display.set_caption("Number Game!")
+pygame.display.set_icon(icon)
 
-def main():
-    # Initialize pygame
-    pygame.init()
-    clock = pygame.time.Clock()
-    icon = pygame.image.load('sprite/number_game.png')
 
+def run_boot():
+    # Initiate instances
+    boot_menu = BootMenu()
+    crt = CRT(800, 400)
+
+    # Main loop (runs every tick) -------------------------------------------------
+    while True:
+        # Event code
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN or event.type == pygame.MOUSEBUTTONDOWN:
+                run_game()
+
+        # Boot code
+        boot_menu.run()
+        crt.draw()
+
+        # Updates, mind the order
+        pygame.display.flip()
+        screen.fill(gv.PURPLE)
+
+        # Time & Clock
+        clock.tick(60)
+
+
+def run_game():
     # Initiate instances
     program = Program()
-    crt = CRT()
-
-    # Set caption, icon, color
-    pygame.display.set_caption("Number Game!")
-    pygame.display.set_icon(icon)
+    crt = CRT(670, 400)
 
     # Main loop (runs every tick) -------------------------------------------------
     while True:
@@ -135,4 +174,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    run_boot()

@@ -143,6 +143,7 @@ class ConfirmButton(Button):
         if len(gv.num_input) < 4:
             self.dynamic_elevation = 0
             self.top_color = gv.LIME
+            self.executed = False
         else:
             if not self.executed:
                 confirm_popup = mixer.Sound('sound/confirm_popup.ogg')
@@ -195,5 +196,4 @@ class AchievementButton(Button):
     def button_action(self):
         self.play_button_pressed()
 
-        print("Display Achievements")
         gv.game_state = 'achievement'
