@@ -117,6 +117,8 @@ def run_boot():
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.KEYDOWN or event.type == pygame.MOUSEBUTTONDOWN:
+                any_key_pressed = mixer.Sound('sound/restart_pressed.ogg')
+                any_key_pressed.play()
                 run_game()
 
         # Boot code
