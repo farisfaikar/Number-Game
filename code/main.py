@@ -62,8 +62,8 @@ class Game:
         self.achievement_text.draw(screen)
 
         # Enter experimental functions here
-        achv = achievement.load_achievement()
-        print(achv["achv01"])
+        # achv = achievement.load_achievement()
+        # print(achv["achv01"])
 
     @staticmethod
     def draw_ui_rect():
