@@ -6,9 +6,10 @@ from random import randint
 from numpad import NumPad
 from button import RestartButton, HighscoreButton, AchievementButton
 from text import ClueText, TimerText, HighscoreText, AchievementText, BootText
+from sound import Sound
 import numbergame
 import timer
-from sound import Sound
+import achievement
 import highscore as hs
 import globalvar as gv
 
@@ -26,7 +27,7 @@ class BootMenu:
         self.boot_text.draw(screen)
 
 
-class Program:
+class Game:
     def __init__(self):
         # Enter instances here -----------------------------------------------------
         numbergame.gen_secret_num()
@@ -58,8 +59,11 @@ class Program:
         self.timer_text.draw(screen)
         self.highscore_text.draw(screen)
 
-        # Enter experimental functions here
         self.achievement_text.draw(screen)
+
+        # Enter experimental functions here
+        achv = achievement.load_achievement()
+        print(achv["achv01"])
 
     @staticmethod
     def draw_ui_rect():
@@ -135,7 +139,7 @@ def run_boot():
 
 def run_game():
     # Initiate instances
-    program = Program()
+    program = Game()
     crt = CRT(670, 400)
 
     # Main loop (runs every tick) -------------------------------------------------

@@ -1,0 +1,16 @@
+{
+  "highscore": [
+    ["Faris", 100],
+    ["Fadel", 200],
+    ["Fadel", 200]
+  ],
+  "achievement": {
+    "achv01": false,
+    "achv02": false,
+    "achv03": false,
+    "achv04": false,
+    "achv05": false,
+    "achv06": false,
+    "achv07": false
+  }
+}
