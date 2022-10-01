@@ -64,7 +64,7 @@ class ClueText(Text):
             self.append_text_data("Press the restart button to play again", gv.RED)
 
             # check if player is worthy of entering the higscores
-            highscore = hs.load_hs()
+            highscore = hs.load_hs()["highscore"]
             is_player_worthy = False
             if len(highscore) == 0:
                 is_player_worthy = True
@@ -114,7 +114,7 @@ class HighscoreText(Text):
         if gv.game_state == 'highscore':
             self.append_text_data("Highscores!", gv.BLUE)
 
-            highscore = hs.load_hs()
+            highscore = hs.load_hs()["highscore"]
             for index, [player_name, player_time] in enumerate(highscore):
                 formatted_player_time = self.reformat_time(player_time)
                 formatted_player_name = self.reformat_name(player_name)
@@ -156,6 +156,7 @@ class HighscoreText(Text):
 class AchievementText(Text):
     def draw(self, screen):
         if gv.game_state == 'achievement':
+            
             data_json = open("data.json", "r")
             data_json_object = json.load(data_json)
 

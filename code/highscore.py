@@ -2,22 +2,36 @@ import json
 import globalvar as gv
 from operator import itemgetter
 
+def check_if_data_exists():
+    try:
+        with open('data.json', 'r') as hs_file:
+            hs_file.close()
+    except FileNotFoundError:
+        default = {"highscore": [], "achievement": 
+                    {"achv01": " ", "achv02": " ", "achv03": " ", "achv04": " ", 
+                    "achv05": " ", "achv06": " ", "achv07": " "}}
+        with open('data.json', 'w') as f:
+            json.dump(default, f)
+        f.close()
 
-def save_hs(highscore):
-    with open('highscore.json', 'w') as hs_file:
-        json.dump(highscore, hs_file)
+        
 
+
+def save_hs(data_json):
+    with open('data.json', 'w') as hs_file:
+        json.dump(data_json, hs_file)
+    hs_file.close()
 
 def load_hs():
-    try:
-        with open('highscore.json', 'r') as hs_file:
-            highscore = json.load(hs_file)
-    except FileNotFoundError:
-        return []
-    return sorted(highscore, key=itemgetter(1), reverse=False)
+    with open('data.json', 'r') as hs_file:
+        data_json = json.load(hs_file)
+    hs_file.close()
+    return data_json
 
 
 def save_score():
-    highscore = load_hs()
+    data_json = load_hs()
+    highscore = data_json["highscore"]
     highscore.append([gv.text_input, gv.lapped_time])
-    save_hs(sorted(highscore, key=itemgetter(1), reverse=False))
+    data_json["highscore"] = sorted(data_json["highscore"], key=itemgetter(1), reverse=False)
+    save_hs(data_json)
