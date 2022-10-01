@@ -1,4 +1,5 @@
-import random
+import random, json
+from achievement import check_achievements
 import globalvar as gv
 
 
@@ -19,6 +20,7 @@ def compare():
 
     if _entered_num == gv.secret_num:
         gv.game_state = 'won'
+        check_achievements(gv.seconds, gv.minutes, gv.remaining_attempts)
     else:
         for letter in _entered_num:
             letter_index = _entered_num.find(letter)
@@ -37,6 +39,7 @@ def compare():
         gv.correct_pos.append(_correct_pos)
 
     gv.is_compared = True
+
 
 
 def restart():

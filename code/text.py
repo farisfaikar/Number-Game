@@ -1,4 +1,4 @@
-import pygame
+import pygame, json
 import highscore as hs
 import globalvar as gv
 import time
@@ -156,8 +156,12 @@ class HighscoreText(Text):
 class AchievementText(Text):
     def draw(self, screen):
         if gv.game_state == 'achievement':
+            data_json = open("data.json", "r")
+            data_json_object = json.load(data_json)
+
+            achievements = data_json_object["achievement"]
+
             self.append_text_data("Achievements!", gv.LIME)
-            achievements = {'achv01': "X", 'achv02': " ", 'achv03': "X", 'achv04': " ", 'achv05': " ", 'achv06': " "}
             self.append_text_data(f"-[{achievements['achv01']}]- I did it!: Finish the puzzle for the first time",
                                   gv.WHITE)
             self.append_text_data(f"-[{achievements['achv02']}]- Quick Solver: Finish the puzzle in less than 1 minute",
