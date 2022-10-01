@@ -1,5 +1,5 @@
 import pygame, json
-import os
+import os, platform
 import highscore as hs
 import globalvar as gv
 import time
@@ -34,8 +34,9 @@ class BootText(Text):
         self.append_text_data("8   8 `Y8P8 8   8   8 88P' `Y88P 8       `Y88P' `Y88 8   8   8 `Y88P", gv.LIME)
         self.append_text_data("#------------------------------------------------------------------#", gv.WHITE)
         self.append_text_data("Made by R0merol", gv.BLUE)
-        self.append_text_data("booting up number-game.py", gv.CREAM)
-        self.append_text_data('pygame 2.0.1 (SDL 2.0.14, Python 3.8.7)', gv.CREAM)
+        self.append_text_data(f"booting up number-game.py", gv.CREAM)
+        self.append_text_data(
+            f'pygame {pygame.__version__} (SDL {".".join(map(str, pygame.get_sdl_version()))}, Python {platform.python_version()})', gv.CREAM)
         self.append_text_data(f'[Running] python -u "{os.path.dirname(__file__)}/main.py"', gv.CREAM)
         self.append_text_data("#------------------------------------------------------------------#", gv.WHITE)
         self.append_text_data("Loading /", gv.RED)
