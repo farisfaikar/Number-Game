@@ -142,6 +142,10 @@ def run_boot():
 
 
 def run_game():
+    #initialize data.json if it doesn't exist
+    hs.check_if_data_exists()
+
+
     # Initiate instances
     program = Game()
     crt = CRT(670, 400)
