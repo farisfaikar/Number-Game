@@ -1,6 +1,7 @@
 # Number Game
 This is a 4 digit number game where you can guess 4 numbers to win the game!
 
+- Don't forget to read the CONTRIBUTING.md file
 - I'm planning to add a tutorial to install and play the game, stay tuned!
 
 So yea, this looks cleaner... so far. Can't wait to make this whole thing messy again.
