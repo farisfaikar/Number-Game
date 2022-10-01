@@ -119,19 +119,20 @@ def run_boot():
 
     # Main loop (runs every tick) -------------------------------------------------
     while True:
+        # Boot code
+        boot_menu.run()
+        crt.draw()
+
         # Event code
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == pygame.KEYDOWN or event.type == pygame.MOUSEBUTTONDOWN:
+            if boot_menu.boot_text.anim_completed and (event.type == pygame.KEYDOWN or event.type == pygame.MOUSEBUTTONDOWN):
                 any_key_pressed = mixer.Sound('sound/restart_pressed.ogg')
                 any_key_pressed.play()
                 run_game()
 
-        # Boot code
-        boot_menu.run()
-        crt.draw()
 
         # Updates, mind the order
         pygame.display.flip()
