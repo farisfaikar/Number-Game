@@ -1,3 +1,4 @@
+import os
 import pygame
 from pygame import mixer
 import sys
@@ -93,6 +94,9 @@ class CRT:
 
 
 # Game Setups -------------------------------------------------------------
+# Switch to parent directory
+path = os.path.dirname(__file__)
+os.chdir(os.path.abspath(os.path.join(path, os.pardir))) 
 # Initialize pygame
 pygame.init()
 clock = pygame.time.Clock()
