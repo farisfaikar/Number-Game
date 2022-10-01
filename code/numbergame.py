@@ -1,5 +1,5 @@
 import random, json
-from data import Achievement
+from achievement import check_achievements
 import globalvar as gv
 
 
@@ -39,24 +39,6 @@ def compare():
         gv.correct_pos.append(_correct_pos)
 
     gv.is_compared = True
-
-def check_achievements(seconds, minutes, atmpts):
-    data_json = open("data.json", "r")
-    data_json_object = json.load(data_json)
-    data_json.close()
-    data_json_object["achievement"]["achv01"]="X"
-    if int(minutes)<=1:
-        data_json_object["achievement"]["achv02"]="X"
-    if int(seconds)<=10:
-        data_json_object["achievement"]["achv03"]="X"
-    if int(atmpts)==gv.MAX_ATTEMPTS:
-        data_json_object["achievement"]["achv04"]="X"
-    data_json = open("data.json", "w")
-    json.dump(data_json_object, data_json)
-    data_json.close()
-
-
-
 
 
 
