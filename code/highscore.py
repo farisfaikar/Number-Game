@@ -11,7 +11,7 @@ def check_if_data_exists():
                     {"achv01": " ", "achv02": " ", "achv03": " ", "achv04": " ", 
                     "achv05": " ", "achv06": " ", "achv07": " "}}
         with open('data.json', 'w') as f:
-            json.dump(default, f)
+            json.dump(default, f, indent=2)
         f.close()
 
         
@@ -19,7 +19,7 @@ def check_if_data_exists():
 
 def save_hs(data_json):
     with open('data.json', 'w') as hs_file:
-        json.dump(data_json, hs_file)
+        json.dump(data_json, hs_file, indent=2)
     hs_file.close()
 
 def load_hs():
