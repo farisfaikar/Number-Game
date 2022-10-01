@@ -27,7 +27,7 @@ python code/main.py
 
 ## Contributing
 
-Contributions, issues and feature requests are welcome. Please read the CONTRIBUTING.md file for guidelines and feel free to check [issues page](https://github.com/R0merol/Number-Game-v0.1/issues) if you want to contribute. 
+Contributions, issues and feature requests are welcome. Please read the [CONTRIBUTING.md](https://github.com/R0merol/Number-Game-v0.1/blob/master/CONTRIBUTING.md) file for guidelines and feel free to check [issues page](https://github.com/R0merol/Number-Game-v0.1/issues) if you want to contribute. 
 
 ## Author
 
