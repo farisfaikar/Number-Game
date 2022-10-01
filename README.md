@@ -41,5 +41,5 @@ Please ⭐️ this repository if this project helped you!
 
 ## License
 
-Copyright © 2021 [R0merol](https://github.com/R0merol).
+Copyright © 2021 [R0merol](https://github.com/R0merol). <br/>
 [MIT](https://choosealicense.com/licenses/mit/)
