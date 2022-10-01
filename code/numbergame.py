@@ -1,4 +1,5 @@
-import random
+import random, json
+from data import Achievement
 import globalvar as gv
 
 
@@ -19,6 +20,7 @@ def compare():
 
     if _entered_num == gv.secret_num:
         gv.game_state = 'won'
+        check_achievements(gv.seconds, gv.minutes, gv.remaining_attempts)
     else:
         for letter in _entered_num:
             letter_index = _entered_num.find(letter)
@@ -37,6 +39,25 @@ def compare():
         gv.correct_pos.append(_correct_pos)
 
     gv.is_compared = True
+
+def check_achievements(seconds, minutes, atmpts):
+    data_json = open("data.json", "r")
+    data_json_object = json.load(data_json)
+    data_json.close()
+    data_json_object["achievement"]["achv01"]="X"
+    if int(minutes)<=1:
+        data_json_object["achievement"]["achv02"]="X"
+    if int(seconds)<=10:
+        data_json_object["achievement"]["achv03"]="X"
+    if int(atmpts)==gv.MAX_ATTEMPTS:
+        data_json_object["achievement"]["achv04"]="X"
+    data_json = open("data.json", "w")
+    json.dump(data_json_object, data_json)
+    data_json.close()
+
+
+
+
 
 
 def restart():
