@@ -1,7 +1,5 @@
 # Number Game
-This is a 4 digit number game where you can guess 4 numbers to win the game! 
-
-## ✨ Demo
+This is a 4 digit number game where you can guess 4 numbers to win the game!
 
 Preview of the game:
 
@@ -15,19 +13,19 @@ Use the package manager [pip](https://pypi.org/project/pip/) to install pygame.
 pip3 install pygame
 ```
 
-## Usage
+## How to run
 Change directory to the Number-Game-v0.1 folder and run the following command:
 ```sh
 python code/main.py
 ```
-### Additional game instructions:
+### Additional game instructions
 - Digits can't be repeated in an attempt, they can be only used once (1123 isn't possible)
 - Click the green '=' sign button after entering 4 numbers
 - Use the hints provided after each attempt to guess the number!
 
 ## Contributing
 
-Contributions, issues and feature requests are welcome. Please read the Contributing.md file for guidelines and feel free to check [issues page](https://github.com/R0merol/Number-Game-v0.1/issues) if you want to contribute. 
+Contributions, issues and feature requests are welcome. Please read the CONTRIBUTING.md file for guidelines and feel free to check [issues page](https://github.com/R0merol/Number-Game-v0.1/issues) if you want to contribute. 
 
 ## Author
 
