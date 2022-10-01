@@ -1,0 +1,2 @@
+pygame
+auto-py-to-exe

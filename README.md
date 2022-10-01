@@ -12,7 +12,7 @@ https://user-images.githubusercontent.com/87220004/140336598-9a2382ce-e6df-46b7-
 Use the package manager [pip](https://pypi.org/project/pip/) to install pygame.
  
 ```bash
-pip3 install pygame
+pip3 install -r requirements.txt
 ```
 
 ## How to run
@@ -20,6 +20,7 @@ Change directory to the Number-Game-v0.1 folder and run the following command:
 ```sh
 python code/main.py
 ```
+
 ### Additional game instructions
 - Digits can't be repeated in an attempt, they can be only used once (1123 isn't possible)
 - Click the green '=' sign button after entering 4 numbers
