@@ -57,6 +57,7 @@ Contributions, issues and feature requests are welcome. Please read the [CONTRIB
 Please ⭐️ this repository if this project helped you!
 
 ## Contributors
+Thank you so much for everyone who has contributed to this little project of mine! I didn't know it would get quite the attention from the community 😀
 
 <a href="https://github.com/R0merol/Number-Game-v0.1/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=R0merol/Number-Game-v0.1" />
