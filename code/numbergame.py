@@ -20,7 +20,7 @@ def compare():
 
     if _entered_num == gv.secret_num:
         gv.game_state = 'won'
-        check_achievements(gv.seconds, gv.minutes, gv.remaining_attempts)
+        check_achievements(gv.seconds, gv.minutes, gv.hours, gv.remaining_attempts)
     else:
         for letter in _entered_num:
             letter_index = _entered_num.find(letter)
