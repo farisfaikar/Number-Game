@@ -1,5 +1,5 @@
 # Number Game
-This is a 4 digit number game where you can guess 4 numbers to win the game!
+This is a 4-digit number game where you can guess 4 numbers to win the game!
 
 ## ✨ Demo
 
@@ -7,19 +7,36 @@ Preview of the game:
 
 https://user-images.githubusercontent.com/87220004/140336598-9a2382ce-e6df-46b7-94fe-efd3b0beb1d9.mp4
 
-## Installation
+## Installation and running
 
-Use the package manager [pip](https://pypi.org/project/pip/) to install pygame.
- 
-```bash
-pip3 install pygame
-```
+1. make sure you have python3 and git installed
+2. clone this repository with `git clone https://github.com/R0merol/Number-Game-v0.1`
+3. change into the Number-Game-v0.1 directory and open a terminal emulator (e.g. CMD on Windows)
 
-## How to run
-Change directory to the Number-Game-v0.1 folder and run the following command:
+### Create a venv (not strictly necessary, but recommended)
+
+Do that with the following commands or if that doesn't work read the [documentation](https://docs.python.org/3/library/venv.html#creating-virtual-environments)
+
 ```sh
-python code/main.py
+python3 -m venv venv
+source venv/bin/activate
 ```
+
+### Install the requirements
+Use the package manager [pip](https://pypi.org/project/pip/) to install pygame.
+Make sure you are still in the Number-Game-v0.1 directory and run the following command.
+ 
+```sh
+pip3 install -r requirements.txt
+```
+
+### How to run
+Make sure you are still in the Number-Game-v0.1 directory and run the following command:
+
+```sh
+python3 code/main.py
+```
+
 ### Additional game instructions
 - Digits can't be repeated in an attempt, they can be only used once (1123 isn't possible)
 - Click the green '=' sign button after entering 4 numbers
@@ -38,6 +55,13 @@ Contributions, issues and feature requests are welcome. Please read the [CONTRIB
 ## Show your support
 
 Please ⭐️ this repository if this project helped you!
+
+## Contributors
+Thank you so much for everyone who has contributed to this little project of mine! I didn't know it would get quite the attention from the community 😀
+
+<a href="https://github.com/R0merol/Number-Game-v0.1/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=R0merol/Number-Game-v0.1" />
+</a>
 
 ## License
 
