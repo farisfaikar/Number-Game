@@ -1,3 +1,7 @@
 {
-	"recommendations": ["ms-python.isort", "ms-python.pylint"]
+	"recommendations": [
+		"ms-python.isort",
+		"ms-python.pylint",
+		"ms-python.black-formatter"
+	]
 }
