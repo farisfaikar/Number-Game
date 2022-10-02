@@ -37,23 +37,23 @@ class BootText(Text):
         self.index = 0
         self.anim_completed = False
         self.texts = [
-            ["8b  8                 8                  .d88b  ", gv.LIME],
-            ["8Ybm8 8   8 8d8b.d8b. 88b. .d88b 8d8b    8P www .d88 8d8b.d8b. .d88b  ", gv.LIME],
-            ["""8  "8 8b d8 8P Y8P Y8 8  8 8.dP' 8P      8b  d8 8  8 8P Y8P Y8 8.dP'""", gv.LIME],
-            ["8   8 `Y8P8 8   8   8 88P' `Y88P 8       `Y88P' `Y88 8   8   8 `Y88P", gv.LIME],
-            ["#------------------------------------------------------------------#", gv.WHITE],
-            ["Made by R0merol", gv.BLUE],
-            [f"booting up number-game.py", gv.CREAM],
-            [f'pygame {pygame.__version__} (SDL {".".join(map(str, pygame.get_sdl_version()))}, Python {platform.python_version()})', gv.CREAM],
-            [f'[Running] python -u "{os.path.dirname(__file__)}/main.py"', gv.CREAM],
-            ["#------------------------------------------------------------------#", gv.WHITE],
+            ("8b  8                 8                  .d88b  ", gv.LIME),
+            ("8Ybm8 8   8 8d8b.d8b. 88b. .d88b 8d8b    8P www .d88 8d8b.d8b. .d88b  ", gv.LIME),
+            ("""8  "8 8b d8 8P Y8P Y8 8  8 8.dP' 8P      8b  d8 8  8 8P Y8P Y8 8.dP'""", gv.LIME),
+            ("8   8 `Y8P8 8   8   8 88P' `Y88P 8       `Y88P' `Y88 8   8   8 `Y88P", gv.LIME),
+            ("#------------------------------------------------------------------#", gv.WHITE),
+            ("Made by R0merol", gv.BLUE),
+            (f"booting up number-game.py", gv.CREAM),
+            (f'pygame {pygame.__version__} (SDL {".".join(map(str, pygame.get_sdl_version()))}, Python {platform.python_version()})', gv.CREAM),
+            (f'[Running] python -u "{os.path.dirname(__file__)}/main.py"', gv.CREAM),
+            ("#------------------------------------------------------------------#", gv.WHITE),
             ["Loading", gv.RED],
-            [".", gv.WHITE],
-            [".", gv.WHITE],
-            [".", gv.WHITE],
-            ["", gv.WHITE],
-            ["Complete!", gv.LIME],
-            ["", gv.WHITE],
+            (".", gv.WHITE),
+            (".", gv.WHITE),
+            (".", gv.WHITE),
+            ("", gv.WHITE),
+            ("Complete!", gv.LIME),
+            ("", gv.WHITE),
         ]
 
     def draw(self, screen):
@@ -71,7 +71,7 @@ class BootText(Text):
         else:
             self.text_data = self.texts[:]
             if time.time() % 1 > 0.5:
-                self.text_data.append(["-- Press any key to start --", gv.CREAM])
+                self.text_data.append(("-- Press any key to start --", gv.CREAM))
         self.render(screen)
 
 
