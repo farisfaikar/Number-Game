@@ -27,26 +27,48 @@ class Text:
 
 
 class BootText(Text):
-    def draw(self, screen):
-        self.append_text_data("8b  8                 8                  .d88b  ", gv.LIME)
-        self.append_text_data("8Ybm8 8   8 8d8b.d8b. 88b. .d88b 8d8b    8P www .d88 8d8b.d8b. .d88b  ", gv.LIME)
-        self.append_text_data("""8  "8 8b d8 8P Y8P Y8 8  8 8.dP' 8P      8b  d8 8  8 8P Y8P Y8 8.dP'""", gv.LIME)
-        self.append_text_data("8   8 `Y8P8 8   8   8 88P' `Y88P 8       `Y88P' `Y88 8   8   8 `Y88P", gv.LIME)
-        self.append_text_data("#------------------------------------------------------------------#", gv.WHITE)
-        self.append_text_data("Made by R0merol", gv.BLUE)
-        self.append_text_data(f"booting up number-game.py", gv.CREAM)
-        self.append_text_data(
-            f'pygame {pygame.__version__} (SDL {".".join(map(str, pygame.get_sdl_version()))}, Python {platform.python_version()})', gv.CREAM)
-        self.append_text_data(f'[Running] python -u "{os.path.dirname(__file__)}/main.py"', gv.CREAM)
-        self.append_text_data("#------------------------------------------------------------------#", gv.WHITE)
-        self.append_text_data("Loading /", gv.RED)
-        self.append_text_data(".", gv.WHITE)
-        self.append_text_data(".", gv.WHITE)
-        self.append_text_data(".", gv.WHITE)
-        self.append_text_data("Complete!", gv.LIME)
-        self.append_text_data("", gv.WHITE)
-        self.append_text_data("-- Press any key to start --", gv.CREAM)
+    def __init__(self, x, y):
+        super().__init__(x, y)
+        self.counts = (5, 5, 5, 5, 5, 20, 5, 5, 50, 5, 150, 5, 5, 5, 5, 30, 5, 5)
+        self.loading = ('-', '\\', '|', '/')
+        self.target = self.counts[0]
+        self.count = 0
+        self.index = 0
+        self.anim_completed = False
+        self.texts = [
+            ["8b  8                 8                  .d88b  ", gv.LIME],
+            ["8Ybm8 8   8 8d8b.d8b. 88b. .d88b 8d8b    8P www .d88 8d8b.d8b. .d88b  ", gv.LIME],
+            ["""8  "8 8b d8 8P Y8P Y8 8  8 8.dP' 8P      8b  d8 8  8 8P Y8P Y8 8.dP'""", gv.LIME],
+            ["8   8 `Y8P8 8   8   8 88P' `Y88P 8       `Y88P' `Y88 8   8   8 `Y88P", gv.LIME],
+            ["#------------------------------------------------------------------#", gv.WHITE],
+            ["Made by R0merol", gv.BLUE],
+            [f"booting up number-game.py", gv.CREAM],
+            [f'pygame {pygame.__version__} (SDL {".".join(map(str, pygame.get_sdl_version()))}, Python {platform.python_version()})', gv.CREAM],
+            [f'[Running] python -u "{os.path.dirname(__file__)}/main.py"', gv.CREAM],
+            ["#------------------------------------------------------------------#", gv.WHITE],
+            ["Loading", gv.RED],
+            [".", gv.WHITE],
+            [".", gv.WHITE],
+            [".", gv.WHITE],
+            ["Complete!", gv.LIME],
+            ["", gv.WHITE],
+            ["-- Press any key to start --", gv.CREAM],   
+        ]
 
+    def draw(self, screen):
+        if not self.anim_completed:
+            if "Loading" in self.texts[self.index][0]:
+                self.texts[self.index][0] = f"Loading {self.loading[self.count//5 % 4]}"
+            self.text_data = self.texts[:(self.index + 1)]
+            if self.count == self.target:
+                if self.index < len(self.texts) - 1:
+                    self.index += 1
+                    self.target += self.counts[self.index]
+                else:
+                    self.anim_completed = True
+            self.count += 1
+        else:
+            self.text_data = self.texts
         self.render(screen)
 
 
