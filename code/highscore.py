@@ -1,32 +1,28 @@
 import json
 import globalvar as gv
 from operator import itemgetter
+import pathlib
+
+DATA_JSON_PATH = pathlib.Path("data.json")
+
 
 def check_if_data_exists():
-    try:
-        with open('data.json', 'r') as hs_file:
-            hs_file.close()
-    except FileNotFoundError:
-        default = {"highscore": [], "achievement": 
+    if not DATA_JSON_PATH.exists():
+        default = {"highscore": [], "achievement":
                     {"achv01": " ", "achv02": " ", "achv03": " ", "achv04": " ", 
                     "achv05": " ", "achv06": " ", "achv07": " "}}
-        with open('data.json', 'w') as f:
-            json.dump(default, f, indent=2)
-        f.close()
-
-        
+        with open(DATA_JSON_PATH, 'w') as file:
+            json.dump(default, file, indent=2)
 
 
 def save_hs(data_json):
-    with open('data.json', 'w') as hs_file:
+    with open(DATA_JSON_PATH, 'w') as hs_file:
         json.dump(data_json, hs_file, indent=2)
-    hs_file.close()
+
 
 def load_hs():
-    with open('data.json', 'r') as hs_file:
-        data_json = json.load(hs_file)
-    hs_file.close()
-    return data_json
+    with open(DATA_JSON_PATH, 'r') as hs_file:
+        return json.load(hs_file)
 
 
 def save_score():
