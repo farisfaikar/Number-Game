@@ -1,4 +1,4 @@
-name: "Isorting and Linting Badge"
+name: "Isorting and Linting"
 
 on: [push, pull_request]
 
