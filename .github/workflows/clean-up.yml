@@ -1,4 +1,4 @@
-name: clean-up
+name: "Isorting and Linting Badge"
 
 on: [push, pull_request]
 

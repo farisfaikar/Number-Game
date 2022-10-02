@@ -1,5 +1,9 @@
 # Number Game
-This is a 4-digit number game where you can guess 4 numbers to win the game!
+
+[![Isorting and Linting Badge](https://github.com/R0merol/Number-Game-v0.1/actions/workflows/clean-up.yml/badge.svg)](https://github.com/R0merol/Number-Game-v0.1/actions/workflows/clean-up.yml)
+This is a 4-digit number game where you can guess 4 numbers to win the game! 
+
+<!-- The badge will not display properly when present in a fork. -->
 
 ## ✨ Demo
 
@@ -23,14 +27,16 @@ source venv/bin/activate
 ```
 
 ### Install the requirements
+
 Use the package manager [pip](https://pypi.org/project/pip/) to install pygame.
 Make sure you are still in the Number-Game-v0.1 directory and run the following command.
- 
+
 ```sh
 pip3 install -r requirements.txt
 ```
 
 ### How to run
+
 Make sure you are still in the Number-Game-v0.1 directory and run the following command:
 
 ```sh
@@ -38,25 +44,27 @@ python3 src/main.py
 ```
 
 ### Additional game instructions
-- Digits can't be repeated in an attempt, they can be only used once (1123 isn't possible)
-- Click the green '=' sign button after entering 4 numbers
-- Use the hints provided after each attempt to guess the number!
+
+-   Digits can't be repeated in an attempt, they can be only used once (1123 isn't possible)
+-   Click the green '=' sign button after entering 4 numbers
+-   Use the hints provided after each attempt to guess the number!
 
 ## Contributing
 
-Contributions, issues and feature requests are welcome. Please read the [CONTRIBUTING.md](https://github.com/R0merol/Number-Game-v0.1/blob/master/CONTRIBUTING.md) file for guidelines and feel free to check [issues page](https://github.com/R0merol/Number-Game-v0.1/issues) if you want to contribute. 
+Contributions, issues and feature requests are welcome. Please read the [CONTRIBUTING.md](https://github.com/R0merol/Number-Game-v0.1/blob/master/CONTRIBUTING.md) file for guidelines and feel free to check [issues page](https://github.com/R0merol/Number-Game-v0.1/issues) if you want to contribute.
 
 ## Author
 
 👤 **Faris Faikar**
 
-- Github: [@R0merol](https://github.com/R0merol)
+-   Github: [@R0merol](https://github.com/R0merol)
 
 ## Show your support
 
 Please ⭐️ this repository if this project helped you!
 
 ## Contributors
+
 Thank you so much for everyone who has contributed to this little project of mine! I didn't know it would get quite the attention from the community 😀
 
 <a href="https://github.com/R0merol/Number-Game-v0.1/graphs/contributors">
