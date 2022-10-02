@@ -34,7 +34,7 @@ pip3 install -r requirements.txt
 Make sure you are still in the Number-Game-v0.1 directory and run the following command:
 
 ```sh
-python3 code/main.py
+python3 src/main.py
 ```
 
 ### Additional game instructions
