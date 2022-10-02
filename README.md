@@ -39,6 +39,12 @@ Contributions, issues and feature requests are welcome. Please read the [CONTRIB
 
 Please ⭐️ this repository if this project helped you!
 
+## Contributors
+
+<a href="https://github.com/R0merol/Number-Game-v0.1/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=R0merol/Number-Game-v0.1" />
+</a>
+
 ## License
 
 Copyright © 2021 [R0merol](https://github.com/R0merol). <br/>
