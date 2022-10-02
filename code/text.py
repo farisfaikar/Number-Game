@@ -29,7 +29,8 @@ class Text:
 class BootText(Text):
     def __init__(self, x, y):
         super().__init__(x, y)
-        self.counts = (5, 5, 5, 5, 5, 20, 5, 5, 50, 5, 150, 5, 5, 5, 5, 30, 5, 5)
+        self.loading_time = 150
+        self.counts = (5, 5, 5, 5, 5, 20, 5, 5, 50, 5, self.loading_time, 5, 5, 5, 5, 5, 30, 5)
         self.loading = ('-', '\\', '|', '/')
         self.target = self.counts[0]
         self.count = 0
@@ -50,15 +51,15 @@ class BootText(Text):
             [".", gv.WHITE],
             [".", gv.WHITE],
             [".", gv.WHITE],
+            ["", gv.WHITE],
             ["Complete!", gv.LIME],
             ["", gv.WHITE],
-            ["-- Press any key to start --", gv.CREAM],   
         ]
 
     def draw(self, screen):
         if not self.anim_completed:
             if "Loading" in self.texts[self.index][0]:
-                self.texts[self.index][0] = f"Loading {self.loading[self.count//5 % 4]}"
+                self.texts[self.index][0] = f"Loading {self.loading[self.count // 5 % 4]} {100 -(self.target - self.count) * 100 // self.loading_time} %"
             self.text_data = self.texts[:(self.index + 1)]
             if self.count == self.target:
                 if self.index < len(self.texts) - 1:
@@ -68,7 +69,9 @@ class BootText(Text):
                     self.anim_completed = True
             self.count += 1
         else:
-            self.text_data = self.texts
+            self.text_data = self.texts[:]
+            if time.time() % 1 > 0.5:
+                self.text_data.append(["-- Press any key to start --", gv.CREAM])
         self.render(screen)
 
 
