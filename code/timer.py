@@ -1,4 +1,3 @@
-from calendar import day_abbr
 import pygame
 import globalvar as gv
 
