@@ -1,18 +1,19 @@
 import os
+import sys
+from random import randint
+
 import pygame
 from pygame import mixer
-import sys
 
-from random import randint
-from numpad import NumPad
-from button import RestartButton, HighscoreButton, AchievementButton
-from text import ClueText, TimerText, HighscoreText, AchievementText, BootText
-from sound import Sound
+import achievement
+import globalvar as gv
+import highscore as hs
 import numbergame
 import timer
-import achievement
-import highscore as hs
-import globalvar as gv
+from button import AchievementButton, HighscoreButton, RestartButton
+from numpad import NumPad
+from sound import Sound
+from text import AchievementText, BootText, ClueText, HighscoreText, TimerText
 
 
 class BootMenu:
@@ -34,8 +35,12 @@ class Game:
         numbergame.gen_secret_num()
 
         self.restart_button = RestartButton("Restart", 110, 30, (680, 360), gv.RED)
-        self.highscore_button = HighscoreButton("Highscore", 110, 30, (680, 320), gv.BLUE)
-        self.achievement_button = AchievementButton("Achievement", 110, 30, (680, 280), gv.LIME)
+        self.highscore_button = HighscoreButton(
+            "Highscore", 110, 30, (680, 320), gv.BLUE
+        )
+        self.achievement_button = AchievementButton(
+            "Achievement", 110, 30, (680, 280), gv.LIME
+        )
 
         self.numpad = NumPad()
 
@@ -77,7 +82,7 @@ class CRT:
     def __init__(self, tv_width, tv_height):
         self.tv_width = tv_width
         self.tv_height = tv_height
-        self.tv = pygame.image.load('sprite/tv.png').convert_alpha()
+        self.tv = pygame.image.load("sprite/tv.png").convert_alpha()
         self.tv = pygame.transform.scale(self.tv, (self.tv_width, self.tv_height))
 
     def create_crt_lines(self):
@@ -85,7 +90,7 @@ class CRT:
         line_amount = int(self.tv_height / line_height)
         for line in range(line_amount):
             y_pos = line * line_height
-            pygame.draw.line(self.tv, 'black', (0, y_pos), (self.tv_width, y_pos), 1)
+            pygame.draw.line(self.tv, "black", (0, y_pos), (self.tv_width, y_pos), 1)
 
     def draw(self):
         self.tv.set_alpha(randint(60, 90))
@@ -96,11 +101,11 @@ class CRT:
 # Game Setups -------------------------------------------------------------
 # Switch to parent directory
 path = os.path.dirname(__file__)
-os.chdir(os.path.abspath(os.path.join(path, os.pardir))) 
+os.chdir(os.path.abspath(os.path.join(path, os.pardir)))
 # Initialize pygame
 pygame.init()
 clock = pygame.time.Clock()
-icon = pygame.image.load('sprite/number_game.png')
+icon = pygame.image.load("sprite/number_game.png")
 
 # Initiate screen
 screen_width = 800
@@ -125,7 +130,7 @@ def run_boot():
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.KEYDOWN or event.type == pygame.MOUSEBUTTONDOWN:
-                any_key_pressed = mixer.Sound('sound/restart_pressed.ogg')
+                any_key_pressed = mixer.Sound("sound/restart_pressed.ogg")
                 any_key_pressed.play()
                 run_game()
 
@@ -142,9 +147,8 @@ def run_boot():
 
 
 def run_game():
-    #initialize data.json if it doesn't exist
+    # initialize data.json if it doesn't exist
     hs.check_if_data_exists()
-
 
     # Initiate instances
     program = Game()
@@ -158,14 +162,14 @@ def run_game():
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.KEYDOWN:
-                if gv.game_state == 'won':
-                    keyboard_pressed = mixer.Sound('sound/keyboard_pressed.ogg')
-                    backspace_pressed = mixer.Sound('sound/backspace_pressed.ogg')
-                    enter_pressed = mixer.Sound('sound/confirm_pressed.ogg')
+                if gv.game_state == "won":
+                    keyboard_pressed = mixer.Sound("sound/keyboard_pressed.ogg")
+                    backspace_pressed = mixer.Sound("sound/backspace_pressed.ogg")
+                    enter_pressed = mixer.Sound("sound/confirm_pressed.ogg")
 
                     if event.key == pygame.K_RETURN:
                         enter_pressed.play()
-                        gv.game_state = 'highscore'
+                        gv.game_state = "highscore"
                         hs.save_score()
                     if event.key == pygame.K_BACKSPACE:
                         backspace_pressed.play()
@@ -187,5 +191,5 @@ def run_game():
         clock.tick(60)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     run_boot()

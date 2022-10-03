@@ -1,6 +1,7 @@
 import pygame
+
 import globalvar as gv
-from button import NumButton, ConfirmButton, ResetButton
+from button import ConfirmButton, NumButton, ResetButton
 
 
 class NumDisplay:
@@ -70,4 +71,6 @@ class NumPad:
         for x in range(column_count):
             self.grid_pos.append([])
             for y in range(row_count):
-                self.grid_pos[x].append([x * x_space + initial_x, y * y_space + initial_y])
+                self.grid_pos[x].append(
+                    [x * x_space + initial_x, y * y_space + initial_y]
+                )

@@ -1,8 +1,12 @@
-import pygame, json
-import os, platform
-import highscore as hs
-import globalvar as gv
+import json
+import os
+import platform
 import time
+
+import pygame
+
+import globalvar as gv
+import highscore as hs
 
 
 class Text:

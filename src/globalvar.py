@@ -10,7 +10,7 @@ BLUE = (111, 186, 170)
 PURPLE = (45, 22, 45)
 
 # Font
-chary_font = 'font/chary___.ttf'
+chary_font = "font/chary___.ttf"
 
 # numbergame variables
 MAX_ATTEMPTS = 8
@@ -20,7 +20,7 @@ correct_pos = []
 combinations = []
 attempts = 0
 secret_num = ""
-game_state = 'main_game'  # game_state identifiers: 'main_game', 'lost', 'won', 'highscore', 'achievement'
+game_state = "main_game"  # game_state identifiers: 'main_game', 'lost', 'won', 'highscore', 'achievement'
 
 # button variables
 num_input = ""

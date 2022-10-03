@@ -1,6 +1,8 @@
-import random, json
-from achievement import check_achievements
+import json
+import random
+
 import globalvar as gv
+from achievement import check_achievements
 
 
 def gen_secret_num():
@@ -19,7 +21,7 @@ def compare():
     _correct_pos = 0
 
     if _entered_num == gv.secret_num:
-        gv.game_state = 'won'
+        gv.game_state = "won"
         check_achievements(gv.seconds, gv.minutes, gv.remaining_attempts)
     else:
         for letter in _entered_num:
@@ -32,7 +34,7 @@ def compare():
         gv.attempts += 1
         gv.remaining_attempts = gv.MAX_ATTEMPTS - gv.attempts
         if gv.attempts >= gv.MAX_ATTEMPTS:
-            gv.game_state = 'lost'
+            gv.game_state = "lost"
 
         gv.combinations.append(_entered_num)
         gv.correct_num.append(_correct_num)
@@ -41,15 +43,14 @@ def compare():
     gv.is_compared = True
 
 
-
 def restart():
     gv.correct_num = []
     gv.correct_pos = []
     gv.combinations = []
     gv.attempts = 0
-    gv.game_state = 'main_game'
+    gv.game_state = "main_game"
     gv.remaining_attempts = gv.MAX_ATTEMPTS
-    gv.secret_num = ''
+    gv.secret_num = ""
     gv.text_input = ""
 
     gen_secret_num()
