@@ -1,18 +1,19 @@
 import json
 from operator import itemgetter
+
 import globalvar as gv
 
 
 class Achievement:
     @staticmethod
     def save(highscore):
-        with open('data.json', 'w') as hs_file:
+        with open("data.json", "w") as hs_file:
             json.dump(highscore, hs_file)
 
     @staticmethod
     def load():
         try:
-            with open('highscore.json', 'r') as hs_file:
+            with open("highscore.json", "r") as hs_file:
                 highscore = json.load(hs_file)
         except FileNotFoundError:
             return []
