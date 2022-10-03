@@ -35,6 +35,7 @@ lapped_time = 0
 is_timer_running = True
 day_elapsed = False
 
+
 # text variables
 text_input = ""
 MAX_TEXT_LENGTH = 10

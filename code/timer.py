@@ -2,15 +2,18 @@ from calendar import day_abbr
 import pygame
 import globalvar as gv
 
-
 def count_up():
     elapsed_time = pygame.time.get_ticks()
     dynamic_time = elapsed_time - gv.static_time
     dynamic_time = dynamic_time
 
     #if one day has elapsed
-    if dynamic_time>=86400000: gv.day_elapsed = True
-    
+    if not gv.day_elapsed and dynamic_time>=86400000: 
+        gv.test = False
+        gv.day_elapsed = True
+        gv.num_input ="BRUH"
+
+
     seconds_ = dynamic_time // 1000 % 60
     minutes_ = dynamic_time // 1000 // 60 % 60
     hours_ = dynamic_time // 1000 // 60 // 60 % 24
