@@ -1,5 +1,5 @@
 # Number Game
-Number Game is a game where players solve a 4-digit secret number combination using clever deductions
+Number Game is a game where players solve a 4-digit secret number combination using clever deductions!
 
 ## ✨ Demo
 
