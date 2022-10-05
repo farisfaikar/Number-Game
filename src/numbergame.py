@@ -12,7 +12,7 @@ def gen_secret_num():
             continue
         else:
             gv.secret_num = gv.secret_num + r_num
-    print(f"DEBUG: secret num = {gv.secret_num}")  # debug: print out secret number
+    # print(f"DEBUG: secret num = {gv.secret_num}")  # debug: print out secret number
 
 
 def compare():
