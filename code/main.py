@@ -154,6 +154,8 @@ def run_game():
     while True:
         # Event code
         for event in pygame.event.get():
+            if event.type in [pygame.QUIT, pygame.KEYDOWN, pygame.MOUSEBUTTONDOWN]:
+                achievement.check_day_elapsed_achievements()
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()

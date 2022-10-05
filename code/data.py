@@ -7,7 +7,7 @@ class Achievement:
     @staticmethod
     def save(highscore):
         with open('data.json', 'w') as hs_file:
-            json.dump(highscore, hs_file)
+            json.dump(highscore, hs_file, indent=2)
 
     @staticmethod
     def load():
