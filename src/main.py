@@ -130,7 +130,7 @@ def run_boot():
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.KEYDOWN or event.type == pygame.MOUSEBUTTONDOWN:
-                any_key_pressed = mixer.Sound("sound/restart_pressed.ogg")
+                any_key_pressed = mixer.Sound("sound/restart_pressed.wav")
                 any_key_pressed.play()
                 run_game()
 
@@ -163,9 +163,9 @@ def run_game():
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if gv.game_state == "won":
-                    keyboard_pressed = mixer.Sound("sound/keyboard_pressed.ogg")
-                    backspace_pressed = mixer.Sound("sound/backspace_pressed.ogg")
-                    enter_pressed = mixer.Sound("sound/confirm_pressed.ogg")
+                    keyboard_pressed = mixer.Sound("sound/keyboard_pressed.wav")
+                    backspace_pressed = mixer.Sound("sound/backspace_pressed.wav")
+                    enter_pressed = mixer.Sound("sound/confirm_pressed.wav")
 
                     if event.key == pygame.K_RETURN:
                         enter_pressed.play()
