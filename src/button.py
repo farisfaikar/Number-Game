@@ -77,7 +77,7 @@ class Button:
 
     @staticmethod
     def play_button_pressed():
-        button_pressed = mixer.Sound("sound/button_pressed.ogg")
+        button_pressed = mixer.Sound("sound/button_pressed.wav")
         button_pressed.play()
 
 
@@ -110,7 +110,7 @@ class NumButton(Button):
             self.top_color = self.TOP_COLOR
 
     def button_action(self):
-        button_pressed = mixer.Sound("sound/button_pressed.ogg")
+        button_pressed = mixer.Sound("sound/button_pressed.wav")
         button_pressed.play()
 
         user_input_length = len(gv.num_input)
@@ -121,7 +121,7 @@ class NumButton(Button):
 
 class ConfirmButton(Button):
     def button_action(self):
-        confirm_pressed = mixer.Sound("sound/confirm_pressed.ogg")
+        confirm_pressed = mixer.Sound("sound/confirm_pressed.wav")
         confirm_pressed.play()
         self.executed = False
 
@@ -131,10 +131,10 @@ class ConfirmButton(Button):
                 if gv.game_state == "won" or gv.game_state == "lost":
                     timer.stop_timer()
                 if gv.game_state == "won":
-                    won_jingle = mixer.Sound("sound/won_jingle.ogg")
+                    won_jingle = mixer.Sound("sound/won_jingle.wav")
                     won_jingle.play()
                 if gv.game_state == "lost":
-                    lost_jingle = mixer.Sound("sound/lost_jingle.ogg")
+                    lost_jingle = mixer.Sound("sound/lost_jingle.wav")
                     lost_jingle.play()
             gv.num_input = ""
 
@@ -147,7 +147,7 @@ class ConfirmButton(Button):
             self.executed = False
         else:
             if not self.executed:
-                confirm_popup = mixer.Sound("sound/confirm_popup.ogg")
+                confirm_popup = mixer.Sound("sound/confirm_popup.wav")
                 confirm_popup.play()
                 self.executed = True
             if self.hitbox_rect.collidepoint(mouse_pos):
@@ -168,7 +168,7 @@ class ConfirmButton(Button):
 
 class ResetButton(Button):
     def button_action(self):
-        reset_pressed = mixer.Sound("sound/reset_pressed.ogg")
+        reset_pressed = mixer.Sound("sound/reset_pressed.wav")
         reset_pressed.set_volume(0.5)
         reset_pressed.play()
 
@@ -177,7 +177,7 @@ class ResetButton(Button):
 
 class RestartButton(Button):
     def button_action(self):
-        restart_pressed = mixer.Sound("sound/restart_pressed.ogg")
+        restart_pressed = mixer.Sound("sound/restart_pressed.wav")
         restart_pressed.play()
 
         numbergame.restart()
