@@ -7,7 +7,7 @@ ORANGE = (241, 157, 93)
 GREEN = (43, 89, 80)
 LIME = (116, 164, 65)
 BLUE = (111, 186, 170)
-PURPLE = (45, 22, 45)
+PURPLE = (45, 22, 45)  # hex: #2d162d
 
 # Font
 chary_font = "font/chary___.ttf"
@@ -38,3 +38,13 @@ is_timer_running = True
 text_input = ""
 MAX_TEXT_LENGTH = 10
 MAX_HIGHSCORE_LIST = 9
+
+
+ACHIEVEMENT_LIST = [
+    "I did it!: Finish the puzzle for the first time",
+    "Quick Solver: Finish the puzzle in less than 1 minute",
+    "Speedrunner: Finish the puzzle in less than 10 seconds",
+    "The Dragon: Solve the puzzle in one attempt",
+    "Sloth: Finish the puzzle in more than an hour",
+    "AFK: Leave the game running for a day",
+]

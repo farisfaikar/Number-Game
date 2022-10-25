@@ -255,29 +255,10 @@ class AchievementText(Text):
             achievements = data_json_object["achievement"]
 
             self.append_text_data("Achievements!", gv.LIME)
-            self.append_text_data(
-                f"-[{achievements['achv01']}]- I did it!: Finish the puzzle for the first time",
-                gv.WHITE,
-            )
-            self.append_text_data(
-                f"-[{achievements['achv02']}]- Quick Solver: Finish the puzzle in less than 1 minute",
-                gv.WHITE,
-            )
-            self.append_text_data(
-                f"-[{achievements['achv03']}]- Speedrunner: Finish the puzzle in less than 10 seconds",
-                gv.WHITE,
-            )
-            self.append_text_data(
-                f"-[{achievements['achv04']}]- The Dragon: Solve the puzzle in one attempt",
-                gv.WHITE,
-            )
-            self.append_text_data(
-                f"-[{achievements['achv05']}]- Sloth: Finish the puzzle in more than an hour",
-                gv.WHITE,
-            )
-            self.append_text_data(
-                f"-[{achievements['achv06']}]- AFK: Leave the game running for a day",
-                gv.WHITE,
-            )
+            for i in range(len(gv.ACHIEVEMENT_LIST)):
+                self.append_text_data(
+                    f"-[{achievements[f'achv0{i+1}']}]- {gv.ACHIEVEMENT_LIST[i]}",
+                    gv.WHITE,
+                )
 
             self.render(screen)
