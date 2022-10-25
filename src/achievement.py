@@ -1,5 +1,6 @@
 import json
 
+from achievement_notif import achv_notif
 from globalvar import MAX_ATTEMPTS
 
 
@@ -7,13 +8,18 @@ def check_achievements(seconds, minutes, atmpts):
     data_json = open("data.json", "r")
     data_json_object = json.load(data_json)
     data_json.close()
-    data_json_object["achievement"]["achv01"] = "X"
+    achivements = data_json_object["achievement"]
+    achivements["achv01"] = "X"
+    achv_notif(1)
     if int(minutes) <= 1:
-        data_json_object["achievement"]["achv02"] = "X"
+        achivements["achv02"] = "X"
+        achv_notif(2)
     if int(seconds) <= 10:
-        data_json_object["achievement"]["achv03"] = "X"
+        achivements["achv03"] = "X"
+        achv_notif(3)
     if int(atmpts) == MAX_ATTEMPTS:
-        data_json_object["achievement"]["achv04"] = "X"
+        achivements["achv04"] = "X"
+        achv_notif(4)
     data_json = open("data.json", "w")
     json.dump(data_json_object, data_json)
     data_json.close()
@@ -23,6 +29,7 @@ def load_achievement():
     try:
         with open("data.json", "r") as data:
             achievement = json.load(data)
+            return achievement["achievement"]
     except FileNotFoundError:
         return {
             "highscore": [],
@@ -36,4 +43,3 @@ def load_achievement():
                 "achv07": False,
             },
         }
-    return achievement["achievement"]
