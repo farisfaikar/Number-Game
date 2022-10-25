@@ -1,11 +1,11 @@
 # ----------- Global Variables -----------
 # Retro Color
-CREAM = (247, 246, 196)
+CREAM = (247, 246, 196)  # hex : #f7f4c4
 WHITE = (255, 255, 255)
-RED = (202, 79, 91)
-ORANGE = (241, 157, 93)
+RED = (202, 79, 91)  # hex : #ca4f7c
+ORANGE = (241, 157, 93)  # hex : #f19d5d
 GREEN = (43, 89, 80)
-LIME = (116, 164, 65)
+LIME = (116, 164, 65)  # hex : #74a441
 BLUE = (111, 186, 170)
 PURPLE = (45, 22, 45)  # hex: #2d162d
 

@@ -13,9 +13,9 @@ def achv_notif(index: int):
 
     ## style
     bg_c = "#2d162d"  ### c for color
-    head_c = "YELLOW"
+    head_c = "#f7f4c4"
     head_style = ("Charybdis", 17, "bold")
-    achv_c = "WHITE"
+    achv_c = "#f19d5d"
     achv_style = ("Charybdis", 15)
 
     ## main window
@@ -55,7 +55,7 @@ def achv_notif(index: int):
     button.configure(
         activebackground="DARKGREEN",
         activeforeground="GREY",
-        bg="GREEN",
+        bg="#74a441",
         fg="WHITE",
         borderwidth=3,
         overrelief="groove",
@@ -70,4 +70,4 @@ def achv_notif(index: int):
 
 
 if __name__ == "__main__":
-    achv_notif(1)
+    achv_notif(2)
