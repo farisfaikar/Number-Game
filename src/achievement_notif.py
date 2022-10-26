@@ -29,7 +29,9 @@ def achv_notif(index: int):
     ## background
     back = Frame(main)
     back.pack()
-    bgimg = ImageTk.PhotoImage(Image.open("sprite/tv.png").resize((wd, hg)))
+    bgimg = ImageTk.PhotoImage(
+        Image.open("sprite/tv.png").resize((wd, hg)), master=back
+    )
     limg = Label(back, i=bgimg)
     limg.config(bg=bg_c)  # hex code for the PURPLE used in bg game screen
     limg.grid(column=0, row=0, columnspan=3, rowspan=3)
@@ -51,7 +53,7 @@ def achv_notif(index: int):
     mesg.grid(column=0, row=1, columnspan=3)
 
     ## ok button
-    button = Button(back, text="Continue", command=main.quit)
+    button = Button(back, text="Continue", command=main.destroy)
     button.configure(
         activebackground="DARKGREEN",
         activeforeground="GREY",
@@ -67,6 +69,11 @@ def achv_notif(index: int):
     button.grid(row=2, column=2)
 
     main.mainloop()
+
+
+def all_achievements(list_ach):
+    for a in list_ach:
+        achv_notif(a)
 
 
 if __name__ == "__main__":
