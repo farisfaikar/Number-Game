@@ -36,7 +36,7 @@ def achv_notif(index: int):
     limg.config(bg=bg_c)  # hex code for the PURPLE used in bg game screen
     limg.grid(column=0, row=0, columnspan=3, rowspan=3)
 
-    ## messagec
+    ## message
     mesg = Label(back, text="Congratulations !", bg=bg_c, fg=head_c)
     mesg.configure(font=head_style)
     mesg.grid(column=0, row=0, columnspan=3)
