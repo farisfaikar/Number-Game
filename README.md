@@ -10,7 +10,7 @@ https://user-images.githubusercontent.com/87220004/140336598-9a2382ce-e6df-46b7-
 ## Installation and running
 
 1. make sure you have python3 and git installed
-2. clone this repository with `git clone https://github.com/R0merol/Number-Game-v0.1`
+2. clone this repository with `git clone https://github.com/farisfaikar/Number-Game-v0.1`
 3. change into the Number-Game-v0.1 directory and open a terminal emulator (e.g. CMD on Windows)
 
 ### Create a venv (not strictly necessary, but recommended)
@@ -44,13 +44,13 @@ python3 src/main.py
 
 ## Contributing
 
-Contributions, issues and feature requests are welcome. Please read the [CONTRIBUTING.md](https://github.com/R0merol/Number-Game-v0.1/blob/master/CONTRIBUTING.md) file for guidelines and feel free to check [issues page](https://github.com/R0merol/Number-Game-v0.1/issues) if you want to contribute. 
+Contributions, issues and feature requests are welcome. Please read the [CONTRIBUTING.md](https://github.com/farisfaikar/Number-Game-v0.1/blob/master/CONTRIBUTING.md) file for guidelines and feel free to check [issues page](https://github.com/farisfaikar/Number-Game-v0.1/issues) if you want to contribute. 
 
 ## Author
 
 👤 **Faris Faikar**
 
-- Github: [@R0merol](https://github.com/R0merol)
+- Github: [@farisfaikar](https://github.com/farisfaikar)
 
 ## Show your support
 
@@ -59,11 +59,11 @@ Please ⭐️ this repository if this project helped you!
 ## Contributors
 Thank you so much for everyone who has contributed to this little project of mine! I didn't know it would get quite the attention from the community 😀
 
-<a href="https://github.com/R0merol/Number-Game-v0.1/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=R0merol/Number-Game-v0.1" />
+<a href="https://github.com/farisfaikar/Number-Game-v0.1/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=farisfaikar/Number-Game-v0.1" />
 </a>
 
 ## License
 
-Copyright © 2021 [R0merol](https://github.com/R0merol). <br/>
+Copyright © 2021 [farisfaikar](https://github.com/farisfaikar). <br/>
 [MIT](https://choosealicense.com/licenses/mit/)
