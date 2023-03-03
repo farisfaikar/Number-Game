@@ -10,8 +10,8 @@ https://user-images.githubusercontent.com/87220004/140336598-9a2382ce-e6df-46b7-
 ## Installation and running
 
 1. make sure you have python3 and git installed
-2. clone this repository with `git clone https://github.com/farisfaikar/Number-Game-v0.1`
-3. change into the Number-Game-v0.1 directory and open a terminal emulator (e.g. CMD on Windows)
+2. clone this repository with `git clone https://github.com/farisfaikar/Number-Game`
+3. change into the Number-Game directory and open a terminal emulator (e.g. CMD on Windows)
 
 ### Create a venv (not strictly necessary, but recommended)
 
@@ -24,14 +24,14 @@ source venv/bin/activate
 
 ### Install the requirements
 Use the package manager [pip](https://pypi.org/project/pip/) to install pygame.
-Make sure you are still in the Number-Game-v0.1 directory and run the following command.
+Make sure you are still in the Number-Game directory and run the following command.
  
 ```sh
 pip3 install -r requirements.txt
 ```
 
 ### How to run
-Make sure you are still in the Number-Game-v0.1 directory and run the following command:
+Make sure you are still in the Number-Game directory and run the following command:
 
 ```sh
 python3 src/main.py
@@ -44,7 +44,7 @@ python3 src/main.py
 
 ## Contributing
 
-Contributions, issues and feature requests are welcome. Please read the [CONTRIBUTING.md](https://github.com/farisfaikar/Number-Game-v0.1/blob/master/CONTRIBUTING.md) file for guidelines and feel free to check [issues page](https://github.com/farisfaikar/Number-Game-v0.1/issues) if you want to contribute. 
+Contributions, issues and feature requests are welcome. Please read the [CONTRIBUTING.md](https://github.com/farisfaikar/Number-Game/blob/master/CONTRIBUTING.md) file for guidelines and feel free to check [issues page](https://github.com/farisfaikar/Number-Game/issues) if you want to contribute. 
 
 ## Author
 
@@ -59,8 +59,8 @@ Please ⭐️ this repository if this project helped you!
 ## Contributors
 Thank you so much for everyone who has contributed to this little project of mine! I didn't know it would get quite the attention from the community 😀
 
-<a href="https://github.com/farisfaikar/Number-Game-v0.1/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=farisfaikar/Number-Game-v0.1" />
+<a href="https://github.com/farisfaikar/Number-Game/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=farisfaikar/Number-Game" />
 </a>
 
 ## License
