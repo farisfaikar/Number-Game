@@ -233,16 +233,10 @@ class HighscoreText(Text):
 
     @staticmethod
     def reformat_time(miliseconds):
-        def add_0(num):
-            if len(str(num)) == 1:
-                return f"0{num}"
-            else:
-                return f"{num}"
-
         seconds = miliseconds // 1000
-        str_seconds = add_0(str(seconds % 60))
-        str_minutes = add_0(str(seconds // 60))
-        return f"{str_minutes}:{str_seconds}"
+        minutes = seconds // 60
+        seconds = seconds % 60
+        return f"{minutes:02d}:{seconds:02d}"
 
 
 class AchievementText(Text):

@@ -10,16 +10,10 @@ def count_up():
     minutes_ = dynamic_time // 1000 // 60 % 60
     hours_ = dynamic_time // 1000 // 60 // 60
 
-    def add_0(num):
-        if len(str(num)) == 1:
-            return f"0{num}"
-        else:
-            return f"{num}"
-
     if gv.is_timer_running:
-        gv.seconds = add_0(seconds_)
-        gv.minutes = add_0(minutes_)
-        gv.hours = add_0(hours_)
+        gv.seconds = f"{seconds_:02d}"
+        gv.minutes = f"{minutes_:02d}"
+        gv.hours = f"{hours_:02d}"
         gv.lapped_time = dynamic_time
 
 
